@@ -11,7 +11,7 @@ from odoo.exceptions import Warning
 class Authorization(models.Model):
     _name = "vitt_fiscal_seq.authorization_code"
 
-    name = fields.Char('Authorization code', help='Authorization code', required=True)
+    name = fields.Char('Authorization code', help='Authorization code', required=True, size= 37)
     expiration_date = fields.Date('Expiration Date', required=True)
     start_date = fields.Date('Start Date', help='start date', required=True)
     company_id = fields.Many2one('res.company', "Company", required=True)

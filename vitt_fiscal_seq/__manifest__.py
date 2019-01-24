@@ -10,8 +10,8 @@
     'description': """
          Regulación del SAR para regimene de facturación para autoimpresores
     """,
-    'author': 'César Alejandro Rodriguez.',
-    'version': '1.0',
+    'author': 'D2i Solutions',
+    'version': '1.1',
     'license': 'Other proprietary',
     'maintainer': '',
     'contributors': '',

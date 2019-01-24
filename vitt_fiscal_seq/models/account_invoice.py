@@ -3,6 +3,8 @@
 from odoo import models, fields, api, _
 from odoo.exceptions import Warning
 from itertools import *
+from datetime import date
+from datetime import datetime
 # mapping invoice type to journal type
 TYPE2JOURNAL = {
     'out_invoice': 'sale',
@@ -286,8 +288,9 @@ class AccountInvoice(models.Model):
     @api.multi
     def action_date_assign(self):
         res = super(AccountInvoice, self).action_date_assign()
+        today = datetime.now()
         if self.sequence_ids:
-            if self.date_invoice > self.sequence_ids.expiration_date:
+            if today > datetime.strptime(self.sequence_ids.expiration_date ,'%Y-%m-%d'):
                 raise Warning(_('The Expiration Date for this fiscal sequence is %s ') % (self.sequence_ids.expiration_date))
             if self.sequence_ids.vitt_number_next_actual > self.sequence_ids.max_value:
                 raise Warning(_('The range of sequence numbers is finished'))

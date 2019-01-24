@@ -33,7 +33,7 @@
                 <sheet>
                     <group colspan="4">
                         <group cols="2">
-                            <field name="name"/>
+                            <field name="name" />
                         </group>
                         <group cols="2">
                             <field name="description"/>
@@ -49,7 +49,7 @@
         <field name="model">vitt_fiscal_seq.authorization_code</field>   
         <field name="arch" type="xml">
             <tree decoration-info="active == False" decoration-muted="active == True">
-                <field name="name"/>
+                <field name="name" />
                 <field name="code_type"/>
                 <field name="company_id"/>
                 <field name="active"/>
@@ -72,7 +72,7 @@
 
                     <group colspan="4">
                         <group cols="2">
-                            <field name="name"/>
+                            <field name="name" placeholder="ABCDEF-ABCDEF-ABCDEF-ABCDEF-ABCDEF-AB"/>
                             <field name="code_type"/>
                             <field name="company_id" placeholder="Select a company..."/>
                         </group>
