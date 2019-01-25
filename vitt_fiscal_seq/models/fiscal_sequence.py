@@ -11,13 +11,16 @@ from odoo.exceptions import Warning
 class Authorization(models.Model):
     _name = "vitt_fiscal_seq.authorization_code"
 
-    name = fields.Char('Authorization code', help='Authorization code', required=True, size=37 )
+    name = fields.Char('Authorization code', help='Authorization code', required=True, size= 37)
     expiration_date = fields.Date('Expiration Date', required=True)
     start_date = fields.Date('Start Date', help='start date', required=True)
     company_id = fields.Many2one('res.company', "Company", required=True)
     code_type = fields.Many2one('vitt_fiscal_seq.authorization_code_type', string='Tax regime code type', help='tax regime type code', required=True)
     active = fields.Boolean("Actived", default=True)
     fiscal_sequence_regime_ids = fields.One2many('vitt_fiscal_seq.fiscal_sequence_regime', 'authorization_code_id')
+    _from_ = fields.Integer(compute='get_from_to',string= 'From')
+    _to_ = fields.Integer(compute='get_from_to',string='to')
+
 
     @api.model
     def create(self, vals):
@@ -52,6 +55,13 @@ class Authorization(models.Model):
         res = self._update_ir_sequence()
         return res
 
+    @api.one
+    def get_from_to(self):
+        #obj = self.env["vitt_fiscal_seq.fiscal_sequence_regime"].search([('authorization_code_id', '=', self.fiscal_sequence_regime_ids.id)])
+        for rec in self:
+            for obj in rec.fiscal_sequence_regime_ids:
+                self._from_ = obj._from
+                self._to_ = obj._to
 
 class Fiscal_sequence(models.Model):
     _name = "vitt_fiscal_seq.fiscal_sequence_regime"

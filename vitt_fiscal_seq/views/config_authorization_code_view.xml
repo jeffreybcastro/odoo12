@@ -51,6 +51,10 @@
             <tree decoration-info="active == False" decoration-muted="active == True">
                 <field name="name" />
                 <field name="code_type"/>
+                <field name="start_date"/>
+                <field name="expiration_date"/>
+                <field name="_from_"/>
+                <field name="_to_"/>
                 <field name="company_id"/>
                 <field name="active"/>
             </tree>
