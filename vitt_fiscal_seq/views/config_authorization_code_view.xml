@@ -50,7 +50,7 @@
         <field name="arch" type="xml">
             <tree decoration-info="active == False" decoration-muted="active == True">
                 <field name="name" />
-                <field name="code_type"/>
+                <field name="doc_type2"/>
                 <field name="start_date"/>
                 <field name="expiration_date"/>
                 <field name="_from_"/>
@@ -78,6 +78,7 @@
                         <group cols="2">
                             <field name="name" placeholder="ABCDEF-ABCDEF-ABCDEF-ABCDEF-ABCDEF-AB"/>
                             <field name="code_type"/>
+                            <field name="doc_type2"/>
                             <field name="company_id" placeholder="Select a company..."/>
                         </group>
                         <group cols="2">

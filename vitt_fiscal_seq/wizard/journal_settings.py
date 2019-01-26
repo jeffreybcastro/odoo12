@@ -23,7 +23,6 @@ class SequenceJournal(models.TransientModel):
         ('out_invoice', 'Customer Invoices'),
         ('out_refund', 'Credit Notes'),
         ('in_refund', 'Debit Notes'),
-        ('in_invoice', 'Supplier Invoice'),
     ], string='Sequence Type', required=True)
 
     @api.onchange('min_value')

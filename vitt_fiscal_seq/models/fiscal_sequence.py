@@ -18,15 +18,27 @@ class Authorization(models.Model):
     code_type = fields.Many2one('vitt_fiscal_seq.authorization_code_type', string='Tax regime code type', help='tax regime type code', required=True)
     active = fields.Boolean("Actived", default=True)
     fiscal_sequence_regime_ids = fields.One2many('vitt_fiscal_seq.fiscal_sequence_regime', 'authorization_code_id')
-    _from_ = fields.Integer(compute='get_from_to',string= 'From')
-    _to_ = fields.Integer(compute='get_from_to',string='to')
+    _from_ = fields.Integer(compute='get_from_to')
+    _to_ = fields.Integer(compute='get_from_to')
+    #doc_type_ = fields.Char(compute='get_from_to',string='Doc. Type')
+    doc_type2 = fields.Selection([
+        ('out_invoice', 'Customer Invoices'),
+        ('out_refund', 'Credit Notes'),
+        ('in_refund', 'Debit Notes'),
+    ], string='Sequence Type', required=True)
 
 
     @api.model
     def create(self, vals):
         res = super(Authorization, self).create(vals)
+        _obj = self.env["vitt_fiscal_seq.authorization_code"].search([['active', '=', True] ,['doc_type2', '=', vals.get("doc_type2")]])
+        array  = []
         if vals.get("start_date") > vals.get("expiration_date"):
             raise Warning(_('Start date is greater than than expiration date'))
+        #Control that only an active regime is allowed
+        #if _obj.doc_type2 == self.doc_type2:
+        if len(_obj) > 1:
+            raise Warning(_('You can not have two active regimens!'))            
         return res
 
     @api.multi
@@ -62,6 +74,23 @@ class Authorization(models.Model):
             for obj in rec.fiscal_sequence_regime_ids:
                 self._from_ = obj._from
                 self._to_ = obj._to
+            # obj_sett = self.env["vitt_fiscal_seq.journal_settings"].search([('journal_id', '=', self.fiscal_sequence_regime_ids.journal_id.id)])
+            # for config in obj_sett:
+            #     self.doc_type_ = config.doc_type.name
+
+    # @api.multi
+    # def create(self, vals):
+    #     res = super(Authorization, self).create(vals)
+    #     for rec in self:
+    #         if rec.doc_type2:
+    #             for actived_ in rec.active:
+    #                 if len(actived_) > 2:
+    #                     raise Warning(_('Example'))
+    #     return res
+
+
+
+
 
 class Fiscal_sequence(models.Model):
     _name = "vitt_fiscal_seq.fiscal_sequence_regime"
@@ -123,5 +152,6 @@ class Code_authorization_type(models.Model):
 
     name = fields.Char('Name', help='tax regime type', required=True)
     description = fields.Char('Description', help='tax regime type description', required=True)
+
 
     _sql_constraints = [('value_code_authorization_type_uniq', 'unique (name)', 'Only one authorization type is permitted!')]
