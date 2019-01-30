@@ -2,9 +2,11 @@
 
 from odoo import models, fields, api, _
 from odoo.exceptions import Warning
-from itertools import *
+import itertools
 from datetime import date
 from datetime import datetime
+
+
 # mapping invoice type to journal type
 TYPE2JOURNAL = {
     'out_invoice': 'sale',
@@ -16,6 +18,24 @@ TYPE2JOURNAL = {
 
 class AccountInvoice(models.Model):
     _inherit = "account.invoice"
+
+    cai_shot        = fields.Char("Cai", readonly=True)
+    cai_expires_shot= fields.Date("Expiration date", readonly=True)
+    min_number_shot = fields.Char("Min Number", readonly=True)
+    max_number_shot = fields.Char("Max Number", readonly=True)
+
+    @api.multi
+    def invoice_validate(self):
+        for regimen in self.sequence_ids.fiscal_sequence_regime_ids:
+            if regimen.actived:
+                self.cai_shot = regimen.authorization_code_id.name
+        for validation in self.sequence_ids:  
+            self.cai_expires_shot = validation.expiration_date
+            self.min_number_shot = str(validation.vitt_min_value)
+            self.max_number_shot = str(validation.vitt_max_value)
+        return self.write({'state': 'open'})
+
+
 
     @api.multi
     @api.depends("company_id")
@@ -56,17 +76,18 @@ class AccountInvoice(models.Model):
                                    domain="[('is_fiscal_sequence', '=',True),('active', '=', True), '|',('code','=', type),('code','=', 'in_refund'),('journal_id', '=', journal_id), '|', ('user_ids','in',False),('user_ids','in', user_id)]")
 
     @api.one
-    @api.depends('journal_id')
     def get_totalt(self):
         self.amount_total_text=''
+        currency_name = self.env["res.currency"].search([('name', '=', self.currency_id.name)])
 
         if self.currency_id:
-            self.amount_total_text=self.to_word(self.amount_total,self.currency_id.name)
+            self.amount_total_text=self.to_word(self.amount_total,str(self.currency_id.name))
         else:
-            self.amount_total_text =self.to_word(self.amount_total,self.user_id.company_id.currency_id.name)
+            self.amount_total_text =self.to_word(self.amount_total,str(self.currency_id.name))
         return True
 
-    def to_word(self,number, mi_moneda):
+    @api.multi 
+    def to_word(self,number,mi_moneda):
         valor= number
         number=int(number)
         centavos=int((round(valor-number,2))*100)
@@ -125,17 +146,27 @@ class AccountInvoice(models.Model):
             {'country': u'Perú', 'currency': 'PEN', 'singular': u'NUEVO SOL', 'plural': u'NUEVOS SOLES', 'symbol': u'S/.'},
             {'country': u'Reino Unido', 'currency': 'GBP', 'singular': u'LIBRA', 'plural': u'LIBRAS', 'symbol': u'£'}
             )
-        if mi_moneda != None:
-            try:
-                moneda = ifilter(lambda x: x['currency'] == mi_moneda, MONEDAS).next()
-                if number < 2:
-                    moneda = moneda['singular']
-                else:
-                    moneda = moneda['plural']
-            except:
-                return "Tipo de moneda inválida"
+        # if mi_moneda != None:
+        #     try:
+        #         moneda = itertools.ifilter(lambda x: x['currency'] == mi_moneda, MONEDAS).next()
+        #         if number < 2:
+        #             moneda = moneda['singular']
+        #         else:
+        #             moneda = moneda['plural']
+        #     except:
+        #         return "Tipo de moneda inválida"
+        # else:
+        #     moneda = ""
+
+        #moneda = list(filter(lambda x: x['currency'] == mi_moneda, MONEDAS))
+        moneda = ''
+        if number < 2:
+            moneda = self.currency_id.currency_unit_label 
         else:
-            moneda = ""
+            moneda = self.currency_id.currency_unit_label+'s'
+
+
+
         converted = ''
         if not (0 < number < 999999999):
             return 'No es posible convertir el numero a letras'
@@ -164,7 +195,7 @@ class AccountInvoice(models.Model):
                 converted += '%s ' % self.convert_group(cientos)
         if(centavos)>0:
             converted+= "con %2i/100 "%centavos
-        converted += moneda
+        converted += str(moneda)
         return converted.title()
 
 
@@ -241,7 +272,6 @@ class AccountInvoice(models.Model):
                 output += '%s%s' % (DECENAS[int(n[1]) - 2], UNIDADES[int(n[2])])
 
         return output
-
     def addComa(self, snum ):
         s = snum;
         i = s.index('.') # Se busca la posición del punto decimal
