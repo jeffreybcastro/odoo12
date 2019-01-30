@@ -20,7 +20,7 @@ class Sequence(models.Model):
     is_fiscal_sequence = fields.Boolean("Fiscal sequence")
     user_ids = fields.Many2many("res.users", string="Users")
 
-
+    @api.one
     @api.depends('min_value','vitt_prefix')
     def display_minimal_value(self):
         if self.vitt_prefix:
@@ -28,8 +28,8 @@ class Sequence(models.Model):
             for filled in range(len(str(self.min_value)), self.vitt_padding):
                 start_number_filled = '0' + start_number_filled
             self.vitt_min_value = self.vitt_prefix + str(start_number_filled)
-            self.prefix = self.vitt_prefix
 
+    @api.one
     @api.depends('max_value','vitt_prefix')
     def display_max_value(self):
         if self.vitt_prefix:
@@ -39,6 +39,7 @@ class Sequence(models.Model):
                 final_number_filled = '0' + final_number_filled
             self.vitt_max_value = self.vitt_prefix + str(final_number_filled)
 
+    @api.one
     @api.depends('number_next_actual')
     def compute_percentage(self):
         numerator = self.number_next_actual - self.min_value
@@ -48,3 +49,8 @@ class Sequence(models.Model):
             self.percentage = (difference * 100) - 1
         else:
             self.percentage = 0
+
+
+    @api.onchange('prefix','suffix','padding')
+    def _onchange_sequence(self):
+        self.prefix = self.vitt_prefix 
