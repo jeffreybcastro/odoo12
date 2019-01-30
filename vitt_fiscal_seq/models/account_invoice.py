@@ -318,7 +318,7 @@ class AccountInvoice(models.Model):
     @api.multi
     def action_date_assign(self):
         res = super(AccountInvoice, self).action_date_assign()
-        today = datetime.now()
+        today = datetime.now().date()
         if self.sequence_ids:
             if today > self.sequence_ids.expiration_date:
                 raise Warning(_('The Expiration Date for this fiscal sequence is %s ') % (self.sequence_ids.expiration_date))
