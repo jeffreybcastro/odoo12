@@ -14,21 +14,21 @@ class Sequence(models.Model):
     vitt_max_value = fields.Char('Max number', readonly=True,compute='display_max_value')
     percentage_alert = fields.Float('percentage alert', default=80)
     percentage = fields.Float('percentage', compute='compute_percentage')
-    vitt_prefix = fields.Char(string = 'Prefix', related='prefix')
-    vitt_padding = fields.Integer('Number padding', related='padding')
+    vitt_prefix = fields.Char(string = 'Prefix', related='prefix', store = True)
+    vitt_padding = fields.Integer('Number padding', related='padding',store = True)
     vitt_number_next_actual = fields.Integer('Next Number', related='number_next_actual')
     is_fiscal_sequence = fields.Boolean("Fiscal sequence")
     user_ids = fields.Many2many("res.users", string="Users")
 
     @api.one
-    @api.depends('min_value')
+    @api.depends('min_value','vitt_prefix')
     def display_minimal_value(self):
         if self.vitt_prefix:
             start_number_filled = str(self.min_value)
             for filled in range(len(str(self.min_value)), self.vitt_padding):
                 start_number_filled = '0' + start_number_filled
             self.vitt_min_value = self.vitt_prefix + str(start_number_filled)
-    @api.depends('max_value')
+    @api.depends('max_value','vitt_prefix')
     def display_max_value(self):
         if self.vitt_prefix:
             final_number = self.max_value
