@@ -54,7 +54,6 @@ class Sequence(models.Model):
     #     self.prefix = self.vitt_prefix
 
     @api.multi
-    @api.depends('vitt_prefix')
     def create(self, vals):
         res = super(Sequence, self).create(vals)
         self.prefix = vals.get("vitt_prefix")
