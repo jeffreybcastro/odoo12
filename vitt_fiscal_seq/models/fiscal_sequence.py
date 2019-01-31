@@ -10,7 +10,8 @@ from odoo.exceptions import Warning
 
 class Authorization(models.Model):
     _name = "vitt_fiscal_seq.authorization_code"
-
+    _description = "Code Authorization"
+    
     name = fields.Char('Authorization code', help='Authorization code', required=True, size= 37)
     expiration_date = fields.Date('Expiration Date', required=True)
     start_date = fields.Date('Start Date', help='start date', required=True)
@@ -94,6 +95,8 @@ class Authorization(models.Model):
 
 class Fiscal_sequence(models.Model):
     _name = "vitt_fiscal_seq.fiscal_sequence_regime"
+    _description = "Fiscal Sequence Authorization"
+    
     authorization_code_id = fields.Many2one('vitt_fiscal_seq.authorization_code', required=True)
     sequence_id = fields.Many2one('ir.sequence', "Fiscal Number")
     actived = fields.Boolean('Active')
@@ -149,6 +152,7 @@ class Fiscal_sequence(models.Model):
 
 class Code_authorization_type(models.Model):
     _name = "vitt_fiscal_seq.authorization_code_type"
+    _description = "Validation Authorization"
 
     name = fields.Char('Name', help='tax regime type', required=True)
     description = fields.Char('Description', help='tax regime type description', required=True)
