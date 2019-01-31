@@ -11,7 +11,7 @@
                 <span>Factura </span> <field name="internal_number" attrs="{'invisible': [('state','not in',('cancel'))]}"/>
             </xpath>
 
-        <field name="sequence_number_next" position="before">
+        <field name="sequence_number_next_prefix" position="replace">
                 <label string="Factura Numero :" attrs="{'invisible': [('state', '=', 'draft')]}"/><br/>
         </field>
 
