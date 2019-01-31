@@ -101,6 +101,7 @@ class SequenceJournal(models.TransientModel):
                   'vitt_number_next_actual': self.number_next,
                   'code': self.doc_type, 
                   'prefix': self.vitt_prefix,
+                  'padding': self.vitt_padding,
                   }
         sequence_write_id = obj_sequence.write(values)
         if sequence_write_id:
@@ -167,7 +168,8 @@ class SequenceJournal(models.TransientModel):
                   'percentage_alert': 80.0,
                   'vitt_number_next_actual': self.number_next,
                   'code': self.doc_type,
-                  'prefix': self.vitt_prefix, }
+                  'prefix': self.vitt_prefix, 
+                  'padding': self.vitt_padding,}
         sequence_id = obj_sequence.create(values)
         if sequence_id:
             users_vals = {}
