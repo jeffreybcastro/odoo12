@@ -13,10 +13,10 @@ class Sequence(models.Model):
     vitt_min_value = fields.Char('Minimal number', readonly=True,compute='display_minimal_value')
     vitt_max_value = fields.Char('Max number', readonly=True ,compute='display_max_value')
     percentage_alert = fields.Float('percentage alert', default=80)
-    percentage = fields.Float('percentage', compute='compute_percentage')
-    vitt_prefix = fields.Char(string = 'Prefix')#,related='prefix')
+    percentage = fields.Float('Percentage', compute='compute_percentage')
+    vitt_prefix = fields.Char('Prefix')#,related='prefix')
     vitt_padding = fields.Integer('Number padding')#, related='padding')
-    vitt_number_next_actual = fields.Integer('Next Number', related='number_next_actual')
+    vitt_number_next_actual = fields.Integer(related='number_next_actual')
     is_fiscal_sequence = fields.Boolean("Fiscal sequence")
     user_ids = fields.Many2many("res.users", string="Users")
 

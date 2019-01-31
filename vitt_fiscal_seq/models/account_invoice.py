@@ -62,8 +62,8 @@ class AccountInvoice(models.Model):
             ('code', '=', self.type),
             ('code', '=', 'in_refund'),
             '|',
-            ('user_ids', 'in', self.user_id.id),
-            ('user_ids', 'in', False),
+            ('user_ids', '=', self.user_id.id),
+            ('user_ids', '=', False),
         ]
         sequence = self.env['ir.sequence'].search(domain)
         for count in sequence:
