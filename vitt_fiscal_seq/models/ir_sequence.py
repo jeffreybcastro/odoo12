@@ -14,8 +14,8 @@ class Sequence(models.Model):
     vitt_max_value = fields.Char('Max number', readonly=True ,compute='display_max_value')
     percentage_alert = fields.Float('percentage alert', default=80)
     percentage = fields.Float('percentage', compute='compute_percentage')
-    vitt_prefix = fields.Char(string = 'Prefix',related='prefix')
-    vitt_padding = fields.Integer('Number padding', related='padding')
+    vitt_prefix = fields.Char(string = 'Prefix')#,related='prefix')
+    vitt_padding = fields.Integer('Number padding')#, related='padding')
     vitt_number_next_actual = fields.Integer('Next Number', related='number_next_actual')
     is_fiscal_sequence = fields.Boolean("Fiscal sequence")
     user_ids = fields.Many2many("res.users", string="Users")
@@ -51,6 +51,13 @@ class Sequence(models.Model):
             self.percentage = 0
 
 
-    @api.onchange('prefix','suffix','padding')
-    def _onchange_sequence(self):
-        self.prefix = self.vitt_prefix 
+    # @api.onchange('prefix','suffix','padding')
+    # def update_sequence(self):
+    #     self.prefix = self.vitt_prefix
+
+    @api.multi
+    @api.depends('vitt_prefix')
+    def create(self, vals):
+        res = super(Sequence, self).create(vals)
+        self.prefix = vals.get("vitt_prefix")
+        return res 
