@@ -53,8 +53,8 @@ class Sequence(models.Model):
     # def update_sequence(self):
     #     self.prefix = self.vitt_prefix
 
-    @api.multi
-    def create(self, vals):
-        res = super(Sequence, self).create(vals)
-        self.prefix = vals.get("vitt_prefix")
-        return res 
+    # @api.multi
+    # def create(self, vals):
+    #     res = super(Sequence, self).create(vals)
+    #     self.prefix = vals.get("vitt_prefix")
+    #     return res 
