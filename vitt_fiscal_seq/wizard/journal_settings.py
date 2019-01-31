@@ -99,7 +99,9 @@ class SequenceJournal(models.TransientModel):
                   'vitt_min_value': vitt_min_value,
                   'vitt_max_value': vitt_max_value,
                   'vitt_number_next_actual': self.number_next,
-                  'code': self.doc_type, }
+                  'code': self.doc_type, 
+                  'prefix': self.vitt_prefix,
+                  }
         sequence_write_id = obj_sequence.write(values)
         if sequence_write_id:
             for fiscal_regime in obj_sequence.fiscal_sequence_regime_ids:
@@ -164,7 +166,8 @@ class SequenceJournal(models.TransientModel):
                   'is_fiscal_sequence': True,
                   'percentage_alert': 80.0,
                   'vitt_number_next_actual': self.number_next,
-                  'code': self.doc_type, }
+                  'code': self.doc_type,
+                  'prefix': self.vitt_prefix, }
         sequence_id = obj_sequence.create(values)
         if sequence_id:
             users_vals = {}

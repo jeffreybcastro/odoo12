@@ -51,14 +51,14 @@ class Sequence(models.Model):
             self.percentage = 0
 
 
-    @api.multi
-    def _update_sequence_(self):
-        if self.fiscal_sequence_regime_ids:
-            vals = {'prefix': self.vitt_prefix}
-            self.write(vals)
-
     # @api.multi
-    # def create(self, vals):
-    #     res = super(Sequence, self).create(vals)
-    #     self.prefix = vals.get("vitt_prefix")
-    #     return res 
+    # def _update_sequence_(self):
+    #     if self.fiscal_sequence_regime_ids:
+    #         vals = {'prefix': self.vitt_prefix}
+    #         self.write(vals)
+
+    # # @api.multi
+    # # def create(self, vals):
+    # #     res = super(Sequence, self).create(vals)
+    # #     self.prefix = vals.get("vitt_prefix")
+    # #     return res 
