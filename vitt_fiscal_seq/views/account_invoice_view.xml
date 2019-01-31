@@ -8,7 +8,7 @@
 
         <field name="arch" type="xml">
             <xpath expr="//form/sheet/h1/div/field[@name='sequence_number_next']" position="replace">
-                Factura : <field name="internal_number" attrs="{'invisible': [('state','not in',('cancel'))]}"/>
+                <span>Factura </span> <field name="internal_number" attrs="{'invisible': [('state','not in',('cancel'))]}"/>
             </xpath>
             <field name="payment_term_id" position="after">
 		 <field name="fiscal_control" invisible="1"/>
