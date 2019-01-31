@@ -49,9 +49,13 @@ class Sequence(models.Model):
             self.percentage = (difference * 100) - 1
         else:
             self.percentage = 0
-    # @api.onchange('prefix','suffix','padding')
-    # def update_sequence(self):
-    #     self.prefix = self.vitt_prefix
+
+
+    @api.multi
+    def _update_sequence_(self):
+        if self.fiscal_sequence_regime_ids:
+            vals = {'prefix': self.vitt_prefix}
+            self.write(vals)
 
     # @api.multi
     # def create(self, vals):
