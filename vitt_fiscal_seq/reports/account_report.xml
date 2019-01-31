@@ -5,17 +5,19 @@
             <xpath expr="//h2" position="after">
 
             	<!-- We add the parameters to the Qweb report SAR  -->>
+                <span t-if="o.type == 'out_invoice'">
                     <span> CAI :  </span> <span t-field="o.cai_shot" ></span><br/>
                     <span> Authorized Range : </span> <span t-field="o.min_number_shot" ></span> To  <span t-field="o.max_number_shot" ></span><br/>
                 	<span> Expiration Date :  </span> <span t-field="o.cai_expires_shot" ></span>
+                </span>
             </xpath>
             <xpath expr="//h2" position="replace">
             	<!-- Change of titles in report Qweb invoicing. -->
                 <h2>
-                	   <span t-if="o.type == 'out_invoice' and (o.state == 'open' or o.state == 'paid')">Invoice</span>
-                        <span t-if="o.type == 'out_invoice' and o.state == 'draft'">Draft Invoice</span>
-                        <span t-if="o.type == 'out_invoice' and o.state == 'cancel'">Cancelled Invoice</span>
-                        <span t-if="o.type == 'out_refund'">Credit Note</span>
+                	   <span t-if="o.type == 'out_invoice' and (o.state == 'open' or o.state == 'paid')">Factura</span>
+                        <span t-if="o.type == 'out_invoice' and o.state == 'draft'">Draft Factura</span>
+                        <span t-if="o.type == 'out_invoice' and o.state == 'cancel'">Cancelled Factura</span>
+                        <span t-if="o.type == 'out_refund'">Nota de Credito</span>
                         <span t-if="o.type == 'in_refund'">Vendor Credit Note</span>
                         <span t-if="o.type == 'in_invoice'">Vendor Bill</span>
                         <span t-field="o.number"/>
