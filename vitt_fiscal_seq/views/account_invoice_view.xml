@@ -10,7 +10,7 @@
             <xpath expr="//form/sheet/h1/div/field[@name='sequence_number_next']" position="replace">
 
         <field name="internal_number" position="attributes">
-                <attribute name="string">New Field Label</attribute>
+                <attribute name="string">Factura Numero </attribute>
         </field>
                  <field name="internal_number" attrs="{'invisible': [('state','not in',('cancel'))]}"/>
             </xpath>
