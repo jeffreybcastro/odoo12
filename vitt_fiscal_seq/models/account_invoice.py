@@ -361,3 +361,10 @@ class AccountInvoice(models.Model):
                 else:
                     inv.move_id.write({'name': inv.internal_number})
         return res
+
+
+
+class Fiscal_manager(models.Model):
+    _inherit = "res.users"
+
+    contro_fiscal = fields.Boolean('Fiscal Control', help='Access to the fiscal control')
