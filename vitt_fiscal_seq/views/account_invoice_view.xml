@@ -12,10 +12,13 @@
         <field name="internal_number" position="attributes">
                 <attribute name="string">Factura Numero </attribute>
         </field>
-                 <field name="internal_number" attrs="{'invisible': [('state','not in',('cancel'))]}"/>
+        <field name="internal_number" attrs="{'invisible': [('state','not in',('cancel'))]}"/>
             </xpath>
-            <field name="payment_term_id" position="after">
-		 <field name="fiscal_control" invisible="1"/>
+        <field name="payment_term_id" position="after">
+		
+
+
+         <field name="fiscal_control" invisible="1"/>
                 <field name="sequence_ids" placeholder="Select a sequence..."  attrs="{'invisible': [('fiscal_control','=',False)], 
 'required': [('fiscal_control', '=', True)], 'readonly': [('state', 'in', ['done', 'open','draft'])]}" options="{'no_create': True}"/>
             </field>
