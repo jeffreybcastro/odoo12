@@ -153,12 +153,12 @@ class Fiscal_sequence(models.Model):
         return super(Fiscal_sequence, self).unlink()
 
 
-class Code_authorization_type(models.Model):
-    _name = "vitt_fiscal_seq.authorization_code_type"
-    _description = "Validation Authorization"
+# class Code_authorization_type(models.Model):
+#     _name = "vitt_fiscal_seq.authorization_code_type"
+#     _description = "Validation Authorization"
 
-    name = fields.Char('Name', help='tax regime type', required=True)
-    description = fields.Char('Description', help='tax regime type description', required=True)
+#     name = fields.Char('Name', help='tax regime type', required=True)
+#     description = fields.Char('Description', help='tax regime type description', required=True)
 
 
-    _sql_constraints = [('value_code_authorization_type_uniq', 'unique (name)', 'Only one authorization type is permitted!')]
+#     _sql_constraints = [('value_code_authorization_type_uniq', 'unique (name)', 'Only one authorization type is permitted!')]

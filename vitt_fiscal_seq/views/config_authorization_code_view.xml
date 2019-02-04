@@ -77,7 +77,7 @@
                     <group colspan="4">
                         <group cols="2">
                             <field name="name" placeholder="ABCDEF-ABCDEF-ABCDEF-ABCDEF-ABCDEF-AB"/>
-                            <field name="code_type"/>
+                            <!-- <field name="code_type"/> -->
                             <field name="doc_type2"/>
                             <field name="company_id" placeholder="Select a company..."/>
                         </group>
