@@ -25,7 +25,7 @@
         </field>
     </record>
 
-    <record id="vitt_authorization_code_type_form_view" model="ir.ui.view">
+<!--     <record id="vitt_authorization_code_type_form_view" model="ir.ui.view">
         <field name="name">vitt.authorization.code.type</field>
         <field name="model">vitt_fiscal_seq.authorization_code_type</field> 
         <field name="arch" type="xml">
@@ -42,7 +42,7 @@
                 </sheet>
             </form>
         </field>
-    </record>
+    </record> -->
 
     <record id="vitt_code_authorization_tree_view" model="ir.ui.view">
         <field name="name">vitt_code_authorization_tree_view</field>
