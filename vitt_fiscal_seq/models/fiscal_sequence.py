@@ -42,7 +42,7 @@ class Authorization(models.Model):
         if len(_obj) > 1:
             raise Warning(_('No pueden estar activos dos regimen de %s !' % (self.doc_type2)))
         #len_cai = srt(self.name).capitalize()
-        len_cai = self.name 
+        len_cai = vals.get("name")
         #if len_cai.endswith(len_cai, 0, 37) != True:
         if len(len_cai) > 37 :
             raise Warning(_('El formato del CAI no es valido!'))
