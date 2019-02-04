@@ -28,6 +28,8 @@ class Authorization(models.Model):
     ], string='Sequence Type', required=True)
 
 
+
+
     @api.model
     def create(self, vals):
         res = super(Authorization, self).create(vals)
@@ -38,7 +40,11 @@ class Authorization(models.Model):
         #Control that only an active regime is allowed
         #if _obj.doc_type2 == self.doc_type2:
         if len(_obj) > 1:
-            raise Warning(_('You can not have two active regimens!'))            
+            raise Warning(_('You can not have two active regimens!'))
+
+        letra = [self.name]
+        if count() <= 37:
+            raise Warning(_('El formato de Regimen no es correcto!'))
         return res
 
     @api.multi
