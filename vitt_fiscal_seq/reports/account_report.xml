@@ -5,7 +5,7 @@
             <xpath expr="//h2" position="after">
 
             	<!-- We add the parameters to the Qweb report SAR  -->>
-                <span t-if="o.type != 'in_invoice'">
+                <span t-if="o.type not in ('in_invoice',''in_refund' ">
                     <span> CAI :  </span> <span t-field="o.cai_shot" ></span><br/>
                     <span> Authorized Range : </span> <span t-field="o.min_number_shot" ></span> To  <span t-field="o.max_number_shot" ></span><br/>
                 	<span> Expiration Date :  </span> <span t-field="o.cai_expires_shot" ></span>
