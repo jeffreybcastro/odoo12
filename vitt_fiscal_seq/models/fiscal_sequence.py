@@ -43,7 +43,7 @@ class Authorization(models.Model):
             raise Warning(_('You can not have two active regimens!'))
 
         letra = [self.name]
-        if count() <= 37:
+        if count(letra) <= 37:
             raise Warning(_('El formato de Regimen no es correcto!'))
         return res
 
