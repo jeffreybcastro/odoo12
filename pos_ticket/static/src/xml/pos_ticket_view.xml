@@ -57,7 +57,7 @@
                 
 
                 
-                <h3>Factura 001-001-01-<t t-esc="order.order_id_()"/></h3>  
+                <!-- <h3>Factura 001-001-01-<t t-esc="order.order_id_()"/></h3>   -->
                 <div style="width: 55%; float: left; padding: 0px 0px;">
                        
                         <t t-if="order.get_client()">
