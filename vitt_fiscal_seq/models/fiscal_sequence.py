@@ -41,8 +41,9 @@ class Authorization(models.Model):
         #if _obj.doc_type2 == self.doc_type2:
         if len(_obj) > 1:
             raise Warning(_('No pueden estar activos dos regimen de %s !' % (self.doc_type2)))
-        if len(vals.get("name")) < 37:
-            raise Warning(_('El formato del Regimen no es valido %s !'% (self.name)))
+        len_cai = srt(self.name).capitalize() 
+        if len_cai.endswith(len_cai, 0, 37) != True:
+            raise Warning(_('El formato del Regimen no es valido %s !'))
         return res
 
     @api.multi
