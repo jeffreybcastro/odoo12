@@ -40,11 +40,11 @@ class Authorization(models.Model):
         #Control that only an active regime is allowed
         #if _obj.doc_type2 == self.doc_type2:
         if len(_obj) > 1:
-            raise Warning(_('You can not have two active regimens!'))
+            raise Warning(_('No pueden estar activos dos regimen de %s !' % (self.doc_type2)))
 
         letra = [self.name]
         if count(letra) <= 37:
-            raise Warning(_('El formato de Regimen no es correcto!'))
+            raise Warning(_('El formato del Regimen no es valido!'))
         return res
 
     @api.multi
