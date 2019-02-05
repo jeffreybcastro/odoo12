@@ -44,7 +44,7 @@ class Authorization(models.Model):
         len_cai = ''
         len_cai = vals.get("name")
         if len(len_cai) <=  36 :
-            raise Warning(_('Formato del CAI es invalido!'))
+            raise Warning(_(len(len_cai)))
         elif len_cai.isupper() == False:
             raise Warning(_('Formato del CAI debe ser en mayuscula!'))                        
         return res
