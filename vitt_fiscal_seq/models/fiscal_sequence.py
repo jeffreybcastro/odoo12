@@ -41,10 +41,12 @@ class Authorization(models.Model):
         #if _obj.doc_type2 == self.doc_type2:
         if len(_obj) > 1:
             raise Warning(_('No pueden estar activos dos regimen de %s !' % (self.doc_type2)))
-
-        len_cai = str(self.name)
+        len_cai = ''
+        len_cai = vals.get("name")
         if len(len_cai) <=  36 :
-            raise Warning(_('El formato del CAI no es valido!'))                        
+            raise Warning(_('Formato del CAI es invalido!'))
+        elif len_cai.isupper() == False:
+            raise Warning(_('Formato del CAI debe ser en mayuscula!'))                        
         return res
 
     @api.multi
@@ -71,6 +73,17 @@ class Authorization(models.Model):
     def write(self, vals):
         res = super(Authorization, self).write(vals)
         res = self._update_ir_sequence()
+        return res
+    
+    @api.multi
+    def write(self, vals):
+        res = super(Authorization, self).write(vals)
+        len_cai = ''
+        len_cai = vals.get("name")
+        if len(len_cai) <=  36 :
+            raise Warning(_('Formato del CAI es invalido!'))
+        elif len_cai.isupper() == False:
+            raise Warning(_('Formato del CAI debe ser en mayuscula!'))       
         return res
 
     @api.one
