@@ -34,7 +34,7 @@
         <field name="arch" type="xml">
             <tree decoration-info="active == False" decoration-muted="active == True">
                 <field name="name" />
-                <!-- <field name="doc_type2"/> -->
+                <field name="code_type"/>
                 <field name="start_date"/>
                 <field name="expiration_date"/>
                 <field name="_from_"/>
