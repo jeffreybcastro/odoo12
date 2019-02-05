@@ -7,22 +7,15 @@
         <field name="inherit_id" ref="account.invoice_form" />
 
         <field name="arch" type="xml">
-            <xpath expr="//form/sheet/h1/div/field[@name='sequence_number_next']" position="replace">
-
-                    <field name="internal_number" position="attributes">
-                            <attribute name="Label">Factura Número </attribute>
-                    </field>
-                    
-                    <field name="internal_number" attrs="{'invisible': [('state','not in',('cancel'))]}"/>
+            <xpath expr="//form/sheet/h1/div/field[@name='sequence_number_next']" position="after">
+                <field name="internal_number" attrs="{'invisible': [('state','not in',('cancel'))]}"/>
             </xpath>
 
-
-
-        <field name="payment_term_id" position="after">
-		
-
-
-         <field name="fiscal_control" invisible="1"/>
+            <field name="number" position="before">
+                <label string="Factura Numero :" attrs="{'invisible': [('state', '=', 'draft')]}"/><br/>
+            </field>
+            <field name="payment_term_id" position="after">
+		 <field name="fiscal_control" invisible="1"/>
                 <field name="sequence_ids" placeholder="Select a sequence..."  attrs="{'invisible': [('fiscal_control','=',False)], 
 'required': [('fiscal_control', '=', True)], 'readonly': [('state', 'in', ['done', 'open'])]}" options="{'no_create': True}"/>
             </field>
@@ -58,34 +51,10 @@
         </field>
     </record>
 
-<!--     <record model="ir.ui.view" id="view_res_user_fiscal_control">
-        <field name="name">control_fiscal</field>
-        <field name="model">res.users</field>
-        <field name="inherit_id" ref="base.view_users_form"/>
-        <field name="arch" type="xml">
-            <field  name="signature" position="after">
-                <group>
-                <field name="restrict_prices"/>
-                </group>
-            </field>
-        </field>
-    </record> -->
 
 
 
-<!-- 
-        <record id="view_price_security_users_form" model="ir.ui.view">
-            <field name="name">price_security.users.form</field>
-            <field name="model">res.users</field>
-            <field name="inherit_id" ref="base.view_users_form"/>
-            <field name="arch" type="xml">
 
-            <field  name="company_id" position="after">
-                <field name="restrict_prices" string="Access to the fiscal control"/>
-            </field>
-            </field>
-        </record>
- -->
 </data>
 </odoo>
 

@@ -1,8 +1,5 @@
 # -*- coding: utf-8 -*-
-##############################################################################
-# For copyright and license notices, see __manifest__.py file in module root
-# directory
-##############################################################################
+
 from odoo import models, fields, api, _
 from odoo.exceptions import Warning
 import itertools
@@ -17,7 +14,6 @@ TYPE2JOURNAL = {
     'out_refund': 'sale',
     'in_refund': 'purchase',
 }
-
 
 class AccountInvoice(models.Model):
     _inherit = "account.invoice"
@@ -62,8 +58,8 @@ class AccountInvoice(models.Model):
             ('code', '=', self.type),
             ('code', '=', 'in_refund'),
             '|',
-            ('user_ids', '=', self.user_id.id),
-            ('user_ids', '=', False),
+            ('user_ids', 'in', self.user_id.id),
+            ('user_ids', 'in', False),
         ]
         sequence = self.env['ir.sequence'].search(domain)
         for count in sequence:
@@ -321,9 +317,9 @@ class AccountInvoice(models.Model):
     @api.multi
     def action_date_assign(self):
         res = super(AccountInvoice, self).action_date_assign()
-        today = datetime.now().date()
+        today = datetime.now()
         if self.sequence_ids:
-            if today > self.sequence_ids.expiration_date:
+            if today > datetime.strptime(self.sequence_ids.expiration_date ,'%Y-%m-%d'):
                 raise Warning(_('The Expiration Date for this fiscal sequence is %s ') % (self.sequence_ids.expiration_date))
             if self.sequence_ids.vitt_number_next_actual > self.sequence_ids.max_value:
                 raise Warning(_('The range of sequence numbers is finished'))
