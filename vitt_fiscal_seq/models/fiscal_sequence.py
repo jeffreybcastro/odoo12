@@ -43,16 +43,13 @@ class Authorization(models.Model):
             raise Warning(_('No pueden estar activos dos regimen de %s !' % (self.doc_type2)))
         
         
-        len_cai = str(self.name)
-        try:
-            if len(len_cai) >= 37 :
-                True
-        except:
-            raise Warning(_('El formato del CAI no es valido!'))
+        
 
-        
-        
-            
+        len_cai = str(self.name)
+        if if len(len_cai) >= 37 :
+            True
+        else:
+            raise Warning(_('El formato del CAI no es valido!' len(len_cai)))            
         return res
 
     @api.multi
