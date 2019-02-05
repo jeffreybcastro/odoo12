@@ -45,11 +45,9 @@ class Authorization(models.Model):
         
         
 
-        len_cai = str(self.name)
-        if len(len_cai) >= 37 :
-            True
-        else:
-            raise Warning(_('El formato del CAI no es valido!' len(len_cai)))            
+        len_cai = str(self.name).capitalize()
+        if len_cai.endswith(len_cai,0,37) == False :
+            raise Warning(_('El formato del CAI no es valido!' len(len_cai)))                        
         return res
 
     @api.multi
