@@ -45,7 +45,7 @@ class Authorization(models.Model):
         
         len_cai = str(self.name)
         try:
-            if len(len_cai) < 37 :
+            if len(len_cai) >= 37 :
                 True
         except:
             raise Warning(_('El formato del CAI no es valido!'))
