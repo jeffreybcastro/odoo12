@@ -15,7 +15,7 @@ class Authorization(models.Model):
     expiration_date = fields.Date('Expiration Date', required=True)
     start_date = fields.Date('Start Date', help='start date', required=True)
     company_id = fields.Many2one('res.company', "Company", required=True)
-    #code_type = fields.Many2one('vitt_fiscal_seq.authorization_code_type', string='Tax regime code type', help='tax regime type code', required=True)
+    code_type = fields.Many2one('vitt_fiscal_seq.authorization_code_type', string='Tax regime code type', help='tax regime type code', required=True)
     active = fields.Boolean("Actived", default=True)
     fiscal_sequence_regime_ids = fields.One2many('vitt_fiscal_seq.fiscal_sequence_regime', 'authorization_code_id')
     _from_ = fields.Integer(compute='get_from_to')
@@ -168,12 +168,12 @@ class Fiscal_sequence(models.Model):
         return super(Fiscal_sequence, self).unlink()
 
 
-# class Code_authorization_type(models.Model):
-#     _name = "vitt_fiscal_seq.authorization_code_type"
-#     _description = "Validation Authorization"
+class Code_authorization_type(models.Model):
+    _name = "vitt_fiscal_seq.authorization_code_type"
+    _description = "Validation Authorization"
 
-#     name = fields.Char('Name', help='tax regime type', required=True)
-#     description = fields.Char('Description', help='tax regime type description', required=True)
+    name = fields.Char('Nombre', help="Tipo de Regimen", required=True)
+    description = fields.Char('Código de Secuencia', required=True)
 
 
-#     _sql_constraints = [('value_code_authorization_type_uniq', 'unique (name)', 'Only one authorization type is permitted!')]
+    _sql_constraints = [('value_code_authorization_type_uniq', 'unique (name)', 'Only one authorization type is permitted!')]
