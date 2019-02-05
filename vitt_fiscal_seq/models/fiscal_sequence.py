@@ -43,7 +43,7 @@ class Authorization(models.Model):
             raise Warning(_('No pueden estar activos dos regimen de %s !' % (self.doc_type2)))
         len_cai = ''
         len_cai = vals.get("name")
-        if len(len_cai) <=  36 :
+        if len(len_cai) <  36 :
             raise Warning(_(len(len_cai)))
         elif len_cai.isupper() == False:
             raise Warning(_('Formato del CAI debe ser en mayuscula!'))                        
@@ -80,7 +80,7 @@ class Authorization(models.Model):
         res = super(Authorization, self).write(vals)
         len_cai = ''
         len_cai = vals.get("name")
-        if len(len_cai) <=  36 :
+        if len(len_cai) <  36 :
             raise Warning(_('Formato del CAI es invalido!'))
         elif len_cai.isupper() == False:
             raise Warning(_('Formato del CAI debe ser en mayuscula!'))       
