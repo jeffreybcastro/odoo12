@@ -21,11 +21,11 @@ class Authorization(models.Model):
     _from_ = fields.Integer(compute='get_from_to')
     _to_ = fields.Integer(compute='get_from_to')
     #doc_type_ = fields.Char(compute='get_from_to',string='Doc. Type')
-    doc_type2 = fields.Selection([
-        ('out_invoice', 'Customer Invoices'),
-        ('out_refund', 'Credit Notes'),
-        ('in_refund', 'Debit Notes'),
-    ], string='Sequence Type', required=True)
+    # doc_type2 = fields.Selection([
+    #     ('out_invoice', 'Customer Invoices'),
+    #     ('out_refund', 'Credit Notes'),
+    #     ('in_refund', 'Debit Notes'),
+    # ], string='Sequence Type', required=True)
 
 
 
@@ -80,7 +80,7 @@ class Authorization(models.Model):
     def write(self, vals):
         res = super(Authorization, self).write(vals)
         len_cai = ''
-        len_cai = vals.get("name")
+        len_cai = self.name
         if len(len_cai) <  36 :
             raise Warning(_('Formato del CAI es invalido!'))
         elif len_cai.isupper() == False:
