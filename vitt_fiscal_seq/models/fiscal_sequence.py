@@ -33,8 +33,8 @@ class Authorization(models.Model):
     @api.model
     def create(self, vals):
         res = super(Authorization, self).create(vals)
-        _obj = self.env["vitt_fiscal_seq.authorization_code"].search([['active', '=', True] ,['doc_type2', '=', vals.get("doc_type2")]])
-        _obj2 = self.env["vitt_fiscal_seq.authorization_code_type"].search([['id', '=', vals.get("doc_type2")]])
+        _obj = self.env["vitt_fiscal_seq.authorization_code"].search([['active', '=', True] ,['code_type', '=', vals.get("code_type")]])
+        _obj2 = self.env["vitt_fiscal_seq.authorization_code_type"].search([['id', '=', vals.get("code_type")]])
         array  = []
         if vals.get("start_date") > vals.get("expiration_date"):
             raise Warning(_('Start date is greater than than expiration date'))
