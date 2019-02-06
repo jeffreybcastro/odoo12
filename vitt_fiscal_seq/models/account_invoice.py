@@ -319,7 +319,7 @@ class AccountInvoice(models.Model):
         res = super(AccountInvoice, self).action_date_assign()
         today = datetime.now().date()
         if self.sequence_ids:
-            if today > datetime.strptime(self.sequence_ids.expiration_date ,'%Y-%m-%d'):
+            if today > datetime.datetime.strptime(self.sequence_ids.expiration_date ,'%Y-%m-%d'):
                 raise Warning(_('The Expiration Date for this fiscal sequence is %s ') % (self.sequence_ids.expiration_date))
             if self.sequence_ids.vitt_number_next_actual > self.sequence_ids.max_value:
                 raise Warning(_('The range of sequence numbers is finished'))
