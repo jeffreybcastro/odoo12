@@ -73,19 +73,25 @@ class Authorization(models.Model):
     @api.multi
     def write(self, vals):
         res = super(Authorization, self).write(vals)
+        len_cai = ''
+        len_cai = self.name
+        if len(len_cai) <=  36 :
+            raise Warning(_('Formato del CAI es invalido!'))
+        elif len_cai.isupper() == False:
+            raise Warning(_('Formato del CAI debe ser en mayuscula!'))   
         res = self._update_ir_sequence()
         return res
     
-    @api.multi
-    def write(self, vals):
-        res = super(Authorization, self).write(vals)
-        len_cai = ''
-        len_cai = self.name
-        if len(len_cai) <  36 :
-            raise Warning(_('Formato del CAI es invalido!'))
-        elif len_cai.isupper() == False:
-            raise Warning(_('Formato del CAI debe ser en mayuscula!'))       
-        return res
+    # @api.multi
+    # def write(self, vals):
+    #     res = super(Authorization, self).write(vals)
+    #     len_cai = ''
+    #     len_cai = self.name
+    #     if len(len_cai) <  36 :
+    #         raise Warning(_('Formato del CAI es invalido!'))
+    #     elif len_cai.isupper() == False:
+    #         raise Warning(_('Formato del CAI debe ser en mayuscula!'))       
+    #     return res
 
     @api.one
     def get_from_to(self):
