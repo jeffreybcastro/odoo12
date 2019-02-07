@@ -182,22 +182,22 @@
                           <td>
                           </td>
                         <td style='text-align:right'>
-                        <t t-esc="widget.format_currency(order.get_change())"/>
+                        <!-- <t t-esc="widget.format_currency(order.get_change())"/> -->
                         </td></tr>
                 </table>
                 <br></br>
-                <span>SON <t t-esc="order.get_letras()"/></span> 
+                <!-- <span>SON <t t-esc="order.get_letras()"/></span>  -->
                  
             <t>
                 <br />
                 <div style='text-align:center' >
-                    <hr></hr>
-                    <span>CAI:<br /></span><t t-esc="widget.pos.cai.name"/>  <br />
-                    <span>Rango Autorizado:</span><br/>
-                    <t t-esc="widget.pos.cai.desde_"/> <br />Hasta <br />
-                    <t t-esc="widget.pos.cai.hasta_"/>
+                    <!-- <hr></hr> -->
+                    <!-- <span>CAI:<br /></span><t t-esc="widget.pos.cai.name"/>  <br /> -->
+                    <!-- <span>Rango Autorizado:</span><br/> -->
+                    <!-- <t t-esc="widget.pos.cai.desde_"/> <br />Hasta <br /> -->
+                    <!-- <t t-esc="widget.pos.cai.hasta_"/> -->
                     <br/>
-                    <span>Fecha Limite : </span><t t-esc="widget.pos.cai.fech_limit"/>
+                    <!-- <span>Fecha Limite : </span><t t-esc="widget.pos.cai.fech_limit"/> -->
                     <hr></hr>
                     <t t-esc="receipt.footer" />
 
