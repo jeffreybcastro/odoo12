@@ -9,11 +9,11 @@ class SequenceJournal(models.TransientModel):
     _description = "Journal Settings"
 
     journal_id = fields.Many2one("account.journal", "Journal", required=True)
-    vitt_prefix = fields.Char('Prefix', required=True)
+    vitt_prefix = fields.Char('Prefix')
     min_value = fields.Integer('Minimal value', required=True)
     max_value = fields.Integer('Max value', required=True)
     number_next = fields.Integer('Next Number to Use', required=True)
-    vitt_padding = fields.Integer('Number padding', required=True)
+    vitt_padding = fields.Integer('Number padding', default=8 )
     company_id = fields.Many2one('res.company', "Company")
     sequence_name = fields.Char("Sequence name")
     user_ids = fields.Many2many("res.users", string="Users")
@@ -23,7 +23,7 @@ class SequenceJournal(models.TransientModel):
         ('out_invoice', 'Customer Invoices'),
         ('out_refund', 'Credit Notes'),
         ('in_refund', 'Debit Notes'),
-        ('pos_order', 'Punto de Venta')
+        ('pos.order', 'Punto de Venta')
     ], string='Sequence Type', required=True)
 
     @api.onchange('min_value')
@@ -41,8 +41,8 @@ class SequenceJournal(models.TransientModel):
         if self.number_next > self.max_value:
             raise Warning(_("'Next Number to Use' must be less than 'Max Value'."))
 
-        if self.vitt_padding <= 0:
-            raise Warning(_("Padding must be greater than zero."))
+        # if self.vitt_padding <= 0:
+        #     raise Warning(_("Padding must be greater than zero."))
         if self.min_value >= self.max_value:
             raise Warning(_("Max Value must be greater than Minimal Value."))
 
@@ -95,15 +95,12 @@ class SequenceJournal(models.TransientModel):
                   'min_value': self.min_value,
                   'max_value': self.max_value,
                   'expiration_date': obj_code_authorization.expiration_date,
-                  'vitt_prefix': self.vitt_prefix,
+                  'vitt_prefix': obj_code_authorization.code_type,#self.vitt_prefix,
                   'vitt_padding': self.vitt_padding,
                   'vitt_min_value': vitt_min_value,
                   'vitt_max_value': vitt_max_value,
                   'vitt_number_next_actual': self.number_next,
-                  'code': self.doc_type, 
-                  'prefix': self.vitt_prefix,
-                  'padding': self.vitt_padding,
-                  }
+                  'code': self.doc_type, }
         sequence_write_id = obj_sequence.write(values)
         if sequence_write_id:
             for fiscal_regime in obj_sequence.fiscal_sequence_regime_ids:
@@ -161,16 +158,14 @@ class SequenceJournal(models.TransientModel):
                   'min_value': self.min_value,
                   'max_value': self.max_value,
                   'expiration_date': obj_code_authorization.expiration_date,
-                  'vitt_prefix': self.vitt_prefix,
+                  'vitt_prefix': obj_code_authorization.code_type,#self.vitt_prefix,
                   'vitt_padding': self.vitt_padding,
                   'vitt_min_value': vitt_min_value,
                   'vitt_max_value': vitt_max_value,
                   'is_fiscal_sequence': True,
                   'percentage_alert': 80.0,
                   'vitt_number_next_actual': self.number_next,
-                  'code': self.doc_type,
-                  'prefix': self.vitt_prefix, 
-                  'padding': self.vitt_padding,}
+                  'code': self.doc_type, }
         sequence_id = obj_sequence.create(values)
         if sequence_id:
             users_vals = {}

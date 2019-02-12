@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 ##############################################################################
 # For copyright and license notices, see __manifest__.py file in module root
+# directory
 ##############################################################################
 
 from odoo import models, fields, api, _
@@ -9,17 +10,17 @@ from odoo.exceptions import Warning
 
 class Authorization(models.Model):
     _name = "vitt_fiscal_seq.authorization_code"
-    _description = "Code Authorization"
-    
+
     name = fields.Char('Authorization code', help='Authorization code', required=True, size= 37)
     expiration_date = fields.Date('Expiration Date', required=True)
     start_date = fields.Date('Start Date', help='start date', required=True)
     company_id = fields.Many2one('res.company', "Company", required=True)
-    code_type = fields.Many2one('vitt_fiscal_seq.authorization_code_type', string='Tax regime code type', help='tax regime type code', required=True)
+    #code_type = fields.Many2one('vitt_fiscal_seq.authorization_code_type', string='Código de Secuencia', required=True)
     active = fields.Boolean("Actived", default=True)
     fiscal_sequence_regime_ids = fields.One2many('vitt_fiscal_seq.fiscal_sequence_regime', 'authorization_code_id')
     _from_ = fields.Integer(compute='get_from_to')
     _to_ = fields.Integer(compute='get_from_to')
+    code_type = fields.Selection(selection='get_regimen', string='Código de Secuencia',required=True)
     #doc_type_ = fields.Char(compute='get_from_to',string='Doc. Type')
     # doc_type2 = fields.Selection([
     #     ('out_invoice', 'Customer Invoices'),
@@ -27,27 +28,41 @@ class Authorization(models.Model):
     #     ('in_refund', 'Debit Notes'),
     # ], string='Sequence Type', required=True)
 
-
-
+    @api.multi
+    def get_regimen(self):
+        dicc = { 
+        '000-001-01-' : '01 Facturas',
+        '000-001-06-' : '06 Notas de Crédito ',
+        '000-001-05-' : '05 Retención',
+        '000-001-07-' : '07 Notas de Débito',
+        '000-001-08-' : '08 Guía de de Remisión'
+        }
+        lst = []
+        for x in dicc.items():
+            lst.append(x)
+        return lst
 
     @api.model
     def create(self, vals):
         res = super(Authorization, self).create(vals)
         _obj = self.env["vitt_fiscal_seq.authorization_code"].search([['active', '=', True] ,['code_type', '=', vals.get("code_type")]])
-        _obj2 = self.env["vitt_fiscal_seq.authorization_code_type"].search([['id', '=', vals.get("code_type")]])
+        # _obj2 = self.env["vitt_fiscal_seq.authorization_code_type"].search([['id', '=', vals.get("code_type")]])
         array  = []
         if vals.get("start_date") > vals.get("expiration_date"):
             raise Warning(_('Start date is greater than than expiration date'))
         #Control that only an active regime is allowed
         #if _obj.doc_type2 == self.doc_type2:
+        
+        code_type_name = vals.get("code_type")
         if len(_obj) > 1:
-            raise Warning(_('No pueden estar activos dos regimen de %s !' % _obj2.name))
+            raise Warning(_('No puedes tener 2 regimenes activos iguales') )
+        
         len_cai = ''
         len_cai = vals.get("name")
-        if len(len_cai) <  36 :
-            raise Warning(_('Formato del CAI no es valido!'))
+        if len(len_cai) <=  36 :
+            raise Warning(_('Formato del CAI es invalido!'))
         elif len_cai.isupper() == False:
-            raise Warning(_('Formato del CAI debe ser en mayuscula!'))                        
+            raise Warning(_('Formato del CAI debe ser en mayuscula!'))                                     
         return res
 
     @api.multi
@@ -78,20 +93,9 @@ class Authorization(models.Model):
         if len(len_cai) <=  36 :
             raise Warning(_('Formato del CAI es invalido!'))
         elif len_cai.isupper() == False:
-            raise Warning(_('Formato del CAI debe ser en mayuscula!'))   
+            raise Warning(_('Formato del CAI debe ser en mayuscula!')) 
         res = self._update_ir_sequence()
         return res
-    
-    # @api.multi
-    # def write(self, vals):
-    #     res = super(Authorization, self).write(vals)
-    #     len_cai = ''
-    #     len_cai = self.name
-    #     if len(len_cai) <  36 :
-    #         raise Warning(_('Formato del CAI es invalido!'))
-    #     elif len_cai.isupper() == False:
-    #         raise Warning(_('Formato del CAI debe ser en mayuscula!'))       
-    #     return res
 
     @api.one
     def get_from_to(self):
@@ -120,8 +124,6 @@ class Authorization(models.Model):
 
 class Fiscal_sequence(models.Model):
     _name = "vitt_fiscal_seq.fiscal_sequence_regime"
-    _description = "Fiscal Sequence Authorization"
-    
     authorization_code_id = fields.Many2one('vitt_fiscal_seq.authorization_code', required=True)
     sequence_id = fields.Many2one('ir.sequence', "Fiscal Number")
     actived = fields.Boolean('Active')
@@ -175,12 +177,15 @@ class Fiscal_sequence(models.Model):
         return super(Fiscal_sequence, self).unlink()
 
 
-class Code_authorization_type(models.Model):
-    _name = "vitt_fiscal_seq.authorization_code_type"
-    _description = "Validation Authorization"
+# class Code_authorization_type(models.Model):
+#     _name = "vitt_fiscal_seq.authorization_code_type"
 
-    name = fields.Char('Nombre', help="Tipo de Regimen", required=True)
-    description = fields.Char('Código de Secuencia', required=True)
+#     # name = fields.Char('Nombre', required=True)
+#     # description = fields.Char('Código de Secuencia', required=True)
+#     name = fields.Selection([
+#          ('out_invoice', 'Customer Invoices'),
+#          ('out_refund', 'Credit Notes'),
+#          ('in_refund', 'Debit Notes'),
+#      ], string='Sequence Type', required=True)
 
-
-    _sql_constraints = [('value_code_authorization_type_uniq', 'unique (name)', 'Only one authorization type is permitted!')]
+#     _sql_constraints = [('value_code_authorization_type_uniq', 'unique (name)', 'Only one authorization type is permitted!')]

@@ -356,13 +356,14 @@ class AccountInvoice(models.Model):
                         inv.write({'internal_number': new_name})
                 else:
                     inv.move_id.write({'name': inv.internal_number})
-        return re
+        return res
+
 
 
 class PosOrder(models.Model):
     _inherit = "pos.order"
 
-    #sar_number = fields.Char(string='Número de Factura', readonly=True, default=False, help="Unique number of the invoice, computed automatically when the invoice is created.", copy=False)
+    sar_number = fields.Char(string='Número de Factura', readonly=True, default=False, help="Unique number of the invoice, computed automatically when the invoice is created.", copy=False)
     
     @api.multi
     def create(self,values):

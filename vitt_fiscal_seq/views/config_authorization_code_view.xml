@@ -113,7 +113,7 @@
 
     <menuitem id="fiscal_sequence" parent="tax_configuration" name="Fiscal Numbers"  sequence="11" action="vitt_fiscal_seq_action_id"/>
 
-
+<!-- 
     <record id="vitt_authorization_code_type_tree_view_1" model="ir.ui.view">
         <field name="name">vitt_authorization_code_type </field>
         <field name="model">vitt_fiscal_seq.authorization_code_type</field> 
@@ -131,7 +131,7 @@
     </record>
 
 
-    <menuitem id="tipo_regimen" parent="tax_configuration" name="Tipo de Regimen"  sequence="16" action="vitt_authorization_code_type_tree_view"/>
+    <menuitem id="tipo_regimen" parent="tax_configuration" name="Tipo de Regimen"  sequence="16" action="vitt_authorization_code_type_tree_view"/> -->
 
 
 </data>

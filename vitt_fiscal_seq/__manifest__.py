@@ -27,7 +27,11 @@
         "views/account_invoice_view.xml",
         "reports/account_report.xml",
         "views/pos_view_update.xml",
+        
     ],
     'demo': [
     ],
+    'installable': True,
+    'application': True,
+    'auto_install': False,
 }
