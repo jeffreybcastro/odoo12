@@ -9,11 +9,11 @@ class SequenceJournal(models.TransientModel):
     _description = "Journal Settings"
 
     journal_id = fields.Many2one("account.journal", "Journal", required=True)
-    vitt_prefix = fields.Char('Prefix')
+    vitt_prefix = fields.Char(string='Prefix')
     min_value = fields.Integer('Minimal value', required=True)
     max_value = fields.Integer('Max value', required=True)
     number_next = fields.Integer('Next Number to Use', required=True)
-    vitt_padding = fields.Integer('Number padding', default=8 )
+    vitt_padding = fields.Integer(string='Number padding', default=8 )
     company_id = fields.Many2one('res.company', "Company")
     sequence_name = fields.Char("Sequence name")
     user_ids = fields.Many2many("res.users", string="Users")
