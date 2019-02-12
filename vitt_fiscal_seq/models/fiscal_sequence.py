@@ -55,7 +55,7 @@ class Authorization(models.Model):
         
         code_type_name = vals.get("code_type")
         if len(_obj) > 1:
-            raise Warning(_('No puedes tener 2 regimenes activos iguales') )
+            raise Warning(_('No puedes tener 2 regimenes activos iguales %S') % code_type )
         
         len_cai = ''
         len_cai = vals.get("name")
