@@ -12,7 +12,7 @@
             </xpath>
 
             <field name="number" position="before">
-                <label string="Factura Numero :" attrs="{'invisible': [('state', '=', 'draft')]}"/><br/>
+                <label string="Factura Numero :"/><br/>
             </field>
             <field name="payment_term_id" position="after">
 		 <field name="fiscal_control" invisible="1"/>
