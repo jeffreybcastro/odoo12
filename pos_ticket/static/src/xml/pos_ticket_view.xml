@@ -15,6 +15,7 @@
                     <div style="width:100%;text-align:center;">
                     <strong> 
                         <t t-esc="widget.pos.company.name"/>
+                        <t t-esc="widget.pos.pos_reference"/>
                     </strong> 
                 </div>
                 </t>
@@ -38,12 +39,14 @@
                     <div style="width:100%;text-align:center;">
                         <t t-esc="widget.pos.company.street"/><br />
                         <t t-esc="widget.pos.company.city"/>
+                        
                     </div>
 
                 </t>
                 <t>
                     <div style="width:100%;text-align:center;">
                         <t t-esc="widget.pos.company.website"/>
+
                     </div>
                 </t>
             </div>
@@ -52,12 +55,15 @@
             <script type="text/javascript" > 
                 
                 
-                
+             
             </script>
+            <h3>Factura : <t t-esc="order.get_subtotal_in_words()"/></h3><br/>
                 
+                 <!-- <h3>Factura<t t-esc="widget.pos.name"/></h3> -->
+                 <!-- <t t-esc="widget.orders.pos_reference "/> -->
+                 <!-- <t t-esc="receipt.propiedad_1"/><br /> -->
 
-                
-                <!-- <h3>Factura 001-001-01-<t t-esc="order.order_id_()"/></h3>   -->
+                 <!-- <t t-esc='receipt.pos_reference' /> -->
                 <div style="width: 55%; float: left; padding: 0px 0px;">
                        
                         <t t-if="order.get_client()">
@@ -200,7 +206,11 @@
                     <!-- <span>Fecha Limite : </span><t t-esc="widget.pos.cai.fech_limit"/> -->
                     <hr></hr>
                     <t t-esc="receipt.footer" />
+                    <span>CAI : <br/> <t t-esc="order.get_cai()"/>  </span><br/>
+                    <span>Rango Autorizado :<br/>  <t t-esc="order.get_min_value()"/> <br/>hasta<br/>  <t t-esc="order.get_max_value()"/> </span><br/>
+                    <span>Fecha Expiración :<br/>  <t t-esc="order.get_expiration_date()"/></span><br/>
 
+                    <span> <t t-esc="order.get_id_sequence()"/></span><br/>
 
                     
                 </div>
