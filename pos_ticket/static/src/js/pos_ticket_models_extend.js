@@ -10,7 +10,7 @@ odoo.define('pos_ticket.models_extend', function (require){
                                     fields: ['id','prefix','name','number_next_actual',
                                     'padding','code','number_next_actual','vitt_number_next_actual',
                                     'vitt_min_value','vitt_max_value','fiscal_sequence_regime_ids','sequence_id','expiration_date','active'],
-                                    domain: [['code','=','pos.order'],['active','=',true]], 
+                                    domain: [['code','=','pos_order'],['active','=',true]], 
                                     loaded: function(self,sequences)
                                     {self.sequences = sequences[0];},
                                 },
