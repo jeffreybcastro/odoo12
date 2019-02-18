@@ -8,5 +8,18 @@
         <record id="vitt_fiscal_seq_user" model="res.groups">
             <field name="name">Multi Fiscal Sequences User</field>
         </record>
+<!-- 
+           <record id="vitt_fiscal_seq_user" model="res.groups">
+     <field name="name">Multi Fiscal Sequences User</field>
+     <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+     <field name="users" eval="[(4, ref('base.user_root'))]"/>
+     <field name="category_id" ref="vitt_fiscal_seq.authorization_code.module_management"/>
+    </record>
+
+    <record id="vitt_fiscal_seq_manager" model="res.groups">
+      <field name="name">Multi Fiscal Sequences Manager</field>
+      <field name="implied_ids" eval="[(4, ref('user_access_rights_demo.group_user'))]"/>
+      <field name="category_id" ref="user_access_rights_demo.module_management"/>
+    </record> -->
     </data>
 </odoo>
