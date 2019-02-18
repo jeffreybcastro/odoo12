@@ -17,6 +17,7 @@
     'contributors': '',
     'category': 'Extra Tools',
     'depends': ['base', 'account', 'vitt_jrseq','point_of_sale'],
+    "update_xml" : ["account_invoice_view.xml", ],
     'data': [
         "security/groups.xml",
         "security/ir.model.access.csv",
@@ -33,5 +34,5 @@
     ],
     'installable': True,
     'application': True,
-    'auto_install': False,
+    'active': False,
 }
