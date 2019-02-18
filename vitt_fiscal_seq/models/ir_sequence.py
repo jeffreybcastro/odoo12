@@ -22,7 +22,7 @@ class Sequence(models.Model):
 
     @api.multi
     def create(self,vals):
-        vals.create({'prefix': self.vitt_prefix})
+        vals.create({'prefix': vals.get("vitt_prefix")})
         res = super(Sequence, self).create(vals)
         return res
 
