@@ -31,7 +31,7 @@
                             <field name="number_next"/>
                         </group>
                         <group cols="2">
-                            <!-- <field name="vitt_padding"/> -->
+                            <field name="vitt_padding"/>
                             <field name="doc_type" placeholder="Select a document type..."/>
                         </group>
                     </group>

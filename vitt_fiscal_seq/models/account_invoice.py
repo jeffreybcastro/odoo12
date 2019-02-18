@@ -367,7 +367,7 @@ class PosOrder(models.Model):
     
     @api.multi
     def create(self,values):
-        new_name = self.env['ir.sequence'].next_by_code('pos.order')
+        new_name = self.env['ir.sequence'].next_by_code('pos_order')
         values['pos_reference'] = new_name
         values['name'] = new_name
         for pos in self:
