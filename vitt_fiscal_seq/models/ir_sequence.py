@@ -21,20 +21,10 @@ class Sequence(models.Model):
     user_ids = fields.Many2many("res.users", string="Users")
 
     @api.multi
-    def get_prefix(self):
-        # res = super(Sequence, self).create(vals)
-        # for rec in self:
-        #     self.prefix = self.vitt_prefix
-        #     self
-        # return res
-        for rec in self:
-            rec.prefix = self.vitt_prefix
-            rec.padding = self.vitt_padding
-
-
-
-
-
+    def create(self):
+        res = super(Sequence, self).create(vals)
+        vals.create({'prefix': self.vitt_prefix})
+        return res
 
 
     @api.depends('min_value')
