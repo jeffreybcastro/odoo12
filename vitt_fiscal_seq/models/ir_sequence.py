@@ -21,11 +21,11 @@ class Sequence(models.Model):
     user_ids = fields.Many2many("res.users", string="Users")
 
     @api.multi
-    def write(self):
+    def write(self,vals):
         prefix = {'prefix': self.vitt_prefix}
         res = super(Sequence, self).write(prefix)
         return res
-            
+
     @api.depends('min_value')
     def display_minimal_value(self):
         if self.vitt_prefix:
