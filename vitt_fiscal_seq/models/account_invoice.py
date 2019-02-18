@@ -287,11 +287,11 @@ class AccountInvoice(models.Model):
                 vals["fiscal_control"] = self._default_fiscal_validated(self.company_id.id) #vals.get("company_id"))
             else:
                 company_id = self.env["res.users"].browse(vals.get("user_id")).company_id.id
-                vals["fiscal_control"] = self._default_fiscal_validated(company_id.id)
+                vals["fiscal_control"] = self._default_fiscal_validated(company_id)
 
             if vals.get("journal_id") and not vals["fiscal_control"]:
                 company_id = self.env["account.journal"].browse(vals.get("journal_id")).company_id.id
-                vals["fiscal_control"] = self._default_fiscal_validated(company_id.id)
+                vals["fiscal_control"] = self._default_fiscal_validated(company_id)
 
             if vals["fiscal_control"] and vals.get("journal_id"):
                 flag = 0
