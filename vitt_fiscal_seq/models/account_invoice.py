@@ -1,4 +1,4 @@
-# -*- coding: utf-8 -*-
+user_ids# -*- coding: utf-8 -*-
 
 from odoo import models, fields, api, _
 from odoo.exceptions import Warning
@@ -58,8 +58,8 @@ class AccountInvoice(models.Model):
             ('code', '=', self.type),
             ('code', '=', 'in_refund'),
             '|',
-            ('user_ids', 'in', self.user_id.id),
-            ('user_ids', 'in', False),
+            ('user_ids', '=', self.user_id.id),
+            ('user_ids', '=', False),
         ]
         sequence = self.env['ir.sequence'].search(domain)
         for count in sequence:
@@ -72,7 +72,7 @@ class AccountInvoice(models.Model):
     # Unique number of the invoice, computed automatically when the invoice is created
     internal_number = fields.Char(string='Invoice Number', readonly=True, default=False, help="Unique number of the invoice, computed automatically when the invoice is created.", copy=False)
     sequence_ids = fields.Many2one("ir.sequence", "Fiscal Number", states={'draft': [('readonly', False)]},
-                                   domain="[('is_fiscal_sequence', '=',True),('active', '=', True), '|',('code','=', type),('code','=', 'in_refund'),('journal_id', '=', journal_id), '|', ('user_ids','in',False),('user_ids','in', user_id)]")
+                                   domain="[('is_fiscal_sequence', '=',True),('active', '=', True), '|',('code','=', type),('code','=', 'in_refund'),('journal_id', '=', journal_id), '|', ('user_ids','=',False),('user_ids','=', user_id)]")
 
     @api.one
     def get_totalt(self):
