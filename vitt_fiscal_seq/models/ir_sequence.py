@@ -14,18 +14,23 @@ class Sequence(models.Model):
     vitt_max_value = fields.Char(string='Max number', readonly=True,compute='display_max_value')
     percentage_alert = fields.Float(string='percentage alert', default=80)
     percentage = fields.Float(string='percentage', compute='compute_percentage')
-    vitt_prefix = fields.Char()
-    vitt_padding = fields.Integer(default=8)
+    vitt_prefix = fields.Char(related='prefix')
+    vitt_padding = fields.Integer(related='padding',default=8)
     vitt_number_next_actual = fields.Integer(related='number_next_actual',store=True)
     is_fiscal_sequence = fields.Boolean(string = "Fiscal sequence")
     user_ids = fields.Many2many("res.users", string="Users")
 
     @api.multi
-    def create(self,vals):
+    def get_prefix(self):
+        # res = super(Sequence, self).create(vals)
         for rec in self:
-            rec.create({'prefix': vals.get("vitt_prefix")})
-        res = super(Sequence, self).create(vals)
-        return res
+            self.prefix = self.vitt_prefix
+        # return res    
+
+
+
+
+
 
     @api.depends('min_value')
     def display_minimal_value(self):
