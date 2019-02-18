@@ -38,8 +38,8 @@ class AccountInvoice(models.Model):
     @api.multi
     @api.depends("company_id")
     def _default_fiscal_validated(self, company_id):
-        if company_id:
-            fiscal_sequence_ids = self.env["vitt_fiscal_seq.authorization_code"].search([('company_id', '=', company_id), ('active', '=', True)])
+        if self.company_id:
+            fiscal_sequence_ids = self.env["vitt_fiscal_seq.authorization_code"].search([('company_id', '=', self.company_id.id), ('active', '=', True)])
             if fiscal_sequence_ids:
                 return True
             else:
@@ -284,14 +284,14 @@ class AccountInvoice(models.Model):
             vals["fiscal_control"] = 0
             vals["sequence_ids"] = 0
             if vals.get("company_id"):
-                vals["fiscal_control"] = self._default_fiscal_validated(vals.get("company_id"))
+                vals["fiscal_control"] = self._default_fiscal_validated(self.company_id.id) #vals.get("company_id"))
             else:
                 company_id = self.env["res.users"].browse(vals.get("user_id")).company_id.id
-                vals["fiscal_control"] = self._default_fiscal_validated(company_id)
+                vals["fiscal_control"] = self._default_fiscal_validated(company_id.id)
 
             if vals.get("journal_id") and not vals["fiscal_control"]:
                 company_id = self.env["account.journal"].browse(vals.get("journal_id")).company_id.id
-                vals["fiscal_control"] = self._default_fiscal_validated(company_id)
+                vals["fiscal_control"] = self._default_fiscal_validated(company_id.id)
 
             if vals["fiscal_control"] and vals.get("journal_id"):
                 flag = 0

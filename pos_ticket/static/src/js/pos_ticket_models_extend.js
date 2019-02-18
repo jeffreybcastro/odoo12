@@ -260,6 +260,7 @@ odoo.define('pos_ticket.models_extend', function (require){
 
 })();
         var total = this.get_total_with_tax();
+        var centavos= parseInt((Math.round(valor-number,2))*100)
         // var converted = "";
         // var centavos = total;
         // if(centavos)>0{
