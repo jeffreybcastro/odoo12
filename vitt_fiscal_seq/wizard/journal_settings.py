@@ -9,11 +9,11 @@ class SequenceJournal(models.TransientModel):
     _description = "Journal Settings"
 
     journal_id = fields.Many2one("account.journal", "Journal", required=True)
-    vitt_prefix = fields.Char(string='Prefix')
+    vitt_prefix = fields.Char()
     min_value = fields.Integer(string='Minimal value', required=True)
     max_value = fields.Integer(string='Max value', required=True)
     number_next = fields.Integer(string='Next Number to Use', required=True)
-    vitt_padding = fields.Integer(string='Number padding', default=8 )
+    vitt_padding = fields.Integer(default=8 )
     company_id = fields.Many2one('res.company', "Company")
     sequence_name = fields.Char(string="Sequence name")
     user_ids = fields.Many2many("res.users", string="Users")
@@ -30,10 +30,6 @@ class SequenceJournal(models.TransientModel):
     def _onchange_min_value(self):
         if not self.number_next:
             self.number_next = self.min_value
-
-    
-
-
 
     @api.one
     def fct_settings_fiscal(self):
@@ -100,7 +96,9 @@ class SequenceJournal(models.TransientModel):
                   'max_value': self.max_value,
                   'expiration_date': obj_code_authorization.expiration_date,
                   'vitt_prefix': self.vitt_prefix,
+                  'prefix': self.vitt_prefix,
                   'vitt_padding': self.vitt_padding,
+                  'padding': self.vitt_padding,
                   'vitt_min_value': vitt_min_value,
                   'vitt_max_value': vitt_max_value,
                   'vitt_number_next_actual': self.number_next,
@@ -163,7 +161,9 @@ class SequenceJournal(models.TransientModel):
                   'max_value': self.max_value,
                   'expiration_date': obj_code_authorization.expiration_date,
                   'vitt_prefix': self.vitt_prefix,
+                  'prefix': self.vitt_prefix,
                   'vitt_padding': self.vitt_padding,
+                  'padding': self.vitt_padding,
                   'vitt_min_value': vitt_min_value,
                   'vitt_max_value': vitt_max_value,
                   'is_fiscal_sequence': True,
