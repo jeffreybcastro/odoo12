@@ -195,7 +195,7 @@
                         </td></tr>
                 </table>
                 <br></br>
-                <span>SON <t t-esc="order.get_letras()"/></span> 
+                <!-- <span>SON <t t-esc="order.get_letras()"/></span>  -->
                  
             <t>
                 <br />
