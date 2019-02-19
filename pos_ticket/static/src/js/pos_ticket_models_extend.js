@@ -232,7 +232,7 @@ odoo.define('pos_ticket.models_extend', function (require){
                             return strMillones + ' ' + strMiles;
                         }//Millones()
 
-                        return function NumeroALetras(num, currency) 
+                        function NumeroALetras(num, currency) 
                         {
                             currency = currency || {};
                             let data = {
@@ -270,7 +270,7 @@ odoo.define('pos_ticket.models_extend', function (require){
                             };
                         };
                         var total = this.get_total_with_tax();
-                        return numeroALetras(total);
+                        return NumeroALetras(total);
 
                     };
 
