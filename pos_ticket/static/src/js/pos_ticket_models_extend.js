@@ -262,16 +262,11 @@ odoo.define('pos_ticket.models_extend', function (require){
     };
 
 })();
-// Modo de uso: 500,34 USD
-numeroALetras(500.34, {
-  plural: 'dólares estadounidenses',
-  singular: 'dólar estadounidense',
-  centPlural: 'centavos',
-  centSingular: 'centavo'
-});
+       
         var total = this.get_total_with_tax();
         return numeroALetras(total);
     },
+
 });
 
 
