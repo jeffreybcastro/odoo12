@@ -251,11 +251,11 @@ odoo.define('pos_ticket.models_extend', function (require){
         };
 
         if(data.enteros == 0)
-            return 'CERO ' + data.letrasMonedaPlural + ' ' + data.letrasCentavos;
+            return 'CERO ' + data.letrasMonedaPlural + ' ' + data.centavos+ '/100';
         if (data.enteros == 1)
-            return Millones(data.enteros) + ' ' + data.letrasMonedaSingular + ' ' + data.centavos.toString() + ' ' + data.letrasMonedaCentavoPlural;;
+            return Millones(data.enteros) + ' ' + data.letrasMonedaSingular + ' ' + data.centavos + '/100' + ' ' + data.letrasMonedaCentavoPlural;
         else
-            return Millones(data.enteros) + ' ' + data.letrasMonedaPlural + ' ' + data.centavos.toString() + ' ' + data.letrasMonedaCentavoPlural;;
+            return Millones(data.enteros) + ' ' + data.letrasMonedaPlural + ' ' + data.centavos + '/100'+ ' ' + data.letrasMonedaCentavoPlural;
     };
 
 })();
