@@ -266,8 +266,11 @@ odoo.define('pos_ticket.models_extend', function (require){
         // if(centavos)>0{
         //     converted += "con " + centavos + "/100"
         // };
-        return NumeroALetras(total);
-    },
+
+
+        return numeroALetras(total);
+
+        },
     
     });
 });
