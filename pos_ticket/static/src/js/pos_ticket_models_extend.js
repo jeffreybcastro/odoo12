@@ -229,11 +229,14 @@ odoo.define('pos_ticket.models_extend', function (require){
     }//Millones()
 
     return function NumeroALetras(num, currency) {
+        var total1 = this.get_total_with_tax();
+        var total2 = parseInt(this.get_total_with_tax());
+        // var centavos= parseInt((Math.round(total1 - total2))*100)
         currency = currency || {};
         let data = {
             numero: num,
             enteros: Math.floor(num),
-            centavos: (((Math.round(num * 100)) - (Math.floor(num) * 100))),
+            centavos: parseInt((Math.round(total1 - total2))*100),
             letrasCentavos: '',
             letrasMonedaPlural: currency.plural || 'LEMPIRAS',//'PESOS', 'Dólares', 'Bolívares', 'etcs'
             letrasMonedaSingular: currency.singular || 'LEMPIRA', //'PESO', 'Dólar', 'Bolivar', 'etc'
@@ -253,9 +256,9 @@ odoo.define('pos_ticket.models_extend', function (require){
         if(data.enteros == 0)
             return 'CERO ' + data.letrasMonedaPlural + ' ' + data.letrasCentavos;
         if (data.enteros == 1)
-            return Millones(data.enteros) + ' ' + data.letrasMonedaSingular + ' ' + data.letrasCentavos;
+            return Millones(data.enteros) + ' ' + data.letrasMonedaSingular + ' ' + centavos + '/100'//data.letrasCentavos;
         else
-            return Millones(data.enteros) + ' ' + data.letrasMonedaPlural + ' ' + data.letrasCentavos;
+            return Millones(data.enteros) + ' ' + data.letrasMonedaPlural + ' ' + centavos + '/100'//data.letrasCentavos;
     };
 
 })();
@@ -269,7 +272,7 @@ odoo.define('pos_ticket.models_extend', function (require){
         // };
 
 
-        return centavos;
+        return NumeroALetras(total1);
     },
     
     });
