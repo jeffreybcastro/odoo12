@@ -284,7 +284,7 @@ class AccountInvoice(models.Model):
             vals["fiscal_control"] = 0
             vals["sequence_ids"] = 0
             if vals.get("company_id"):
-                vals["fiscal_control"] = self._default_fiscal_validated(self.company_id.id) #vals.get("company_id"))
+                vals["fiscal_control"] = self._default_fiscal_validated(self.company_id) #vals.get("company_id"))
             else:
                 company_id = self.env["res.users"].browse(vals.get("user_id")).company_id.id
                 vals["fiscal_control"] = self._default_fiscal_validated(company_id)
@@ -368,8 +368,8 @@ class PosOrder(models.Model):
     def create(self,values):
         new_name = self.env['ir.sequence'].next_by_code('pos_order')
         values['pos_reference'] = new_name
-        values['name'] = new_name
-        for pos in self:
-            pos.write({'name': new_name})
+        # values['name'] = new_name
+        # for pos in self:
+        #     pos.write({'name': new_name})
         res = super(PosOrder, self).create(values)
         return res
