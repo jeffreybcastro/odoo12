@@ -242,20 +242,20 @@ odoo.define('pos_ticket.models_extend', function (require){
         };
 
         if (data.centavos > 0) {
-            data.letrasCentavos = 'CON ' + (function () {
+            data.letrasCentavos = ' CON ' + (function () {
                     if (data.centavos == 1)
-                        return  ' ' + data.centavos+ '/100'+' '+data.letrasMonedaCentavoSingular;
+                        return  ' CON ' + data.centavos+ '/100'+' '+data.letrasMonedaCentavoSingular;
                     else
-                        return ' ' + data.centavos+ '/100'+' '+data.letrasMonedaCentavoPlural;
+                        return ' CON '  + data.centavos+ '/100'+' '+data.letrasMonedaCentavoPlural;
                 })();
         };
 
         if(data.enteros == 0)
             return 'CERO ' + data.letrasMonedaPlural + ' ' + data.centavos+ '/100';
         if (data.enteros == 1)
-            return Millones(data.enteros) + ' ' + data.letrasMonedaSingular + ' ' + data.centavos + '/100' + ' ' + data.letrasMonedaCentavoPlural;
+            return Millones(data.enteros) + ' ' + data.letrasMonedaSingular + ' CON ' + data.centavos + '/100' + ' ' + data.letrasMonedaCentavoPlural;
         else
-            return Millones(data.enteros) + ' ' + data.letrasMonedaPlural + ' ' + data.centavos + '/100'+ ' ' + data.letrasMonedaCentavoPlural;
+            return Millones(data.enteros) + ' ' + data.letrasMonedaPlural + ' CON ' + data.centavos + '/100'+ ' ' + data.letrasMonedaCentavoPlural;
     };
 
 })();
