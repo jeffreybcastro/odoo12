@@ -268,7 +268,7 @@ odoo.define('pos_ticket.models_extend', function (require){
         // };
 
 
-        return numeroALetras(total);
+        return centavos;
     },
     
     });
