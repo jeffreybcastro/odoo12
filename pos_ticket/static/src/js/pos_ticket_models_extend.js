@@ -262,9 +262,9 @@ odoo.define('pos_ticket.models_extend', function (require){
     };
 
 })();
-        var total1 = this.get_total_with_tax();
-        var total2 = parseInt(this.get_total_with_tax());
-        var centavos= parseInt((Math.round(total1 - total2))*100)
+        var total = this.get_total_with_tax();
+        // var total2 = parseInt(this.get_total_with_tax());
+        // var centavos= parseInt((Math.round(total1 - total2))*100)
         // var converted = "";
         // var centavos = total;
         // if(centavos)>0{
@@ -272,7 +272,7 @@ odoo.define('pos_ticket.models_extend', function (require){
         // };
 
 
-        return NumeroALetras(total1);
+        return NumeroALetras(total);
     },
     
     });
