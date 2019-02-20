@@ -19,7 +19,7 @@ odoo.define('pos_ticket.models_extend', function (require){
                                     model: 'vitt_fiscal_seq.fiscal_sequence_regime', 
                                     fields: ['authorization_code_id','id','actived'],
                                     // domain: [['id','=',this.get_id_sequence()]],
-                                    domain:[['id','=', self.sequences.fiscal_sequence_regime_ids], [ 'actived','=', true ]],
+                                    domain: function(self){ return [['id','=', self.sequences.fiscal_sequence_regime_ids], [ 'actived','=', true ]]; },
                                     loaded: function(self, fiscal_codes)
                                     {self.fiscal_code = fiscal_codes[0];},
                                 },
@@ -61,15 +61,8 @@ odoo.define('pos_ticket.models_extend', function (require){
         get_cai: function(fiscal_code) {
             // CAI autorizado para la autoimpresion
             self = this;
-            if (self.pos.fiscal_code.authorization_code_id) {
             var cai =  self.pos.fiscal_code.authorization_code_id[1];
             return cai;
-
-            }
-            else{
-                return 0;
-            };
-
         },
         get_addre :function (companies) {
             // La direccion de la Empresa
@@ -93,11 +86,7 @@ odoo.define('pos_ticket.models_extend', function (require){
                     }
                     return s;
                 }
-            var num = 0;
-            if (self.pos.sequences.vitt_number_next_actual) {
-                num =  self.pos.sequences.vitt_number_next_actual++;
-            };
-            
+            var num =  self.pos.sequences.vitt_number_next_actual++;
 
             return prefix + sequense(num);
             // Funciones que trae el POS predeterminado
@@ -297,4 +286,3 @@ odoo.define('pos_ticket.models_extend', function (require){
         //     return json;
 
         // },
-
