@@ -3,8 +3,6 @@
     <data>
         <record id="vitt_fiscal_seq_manager" model="res.groups">
             <field name="name">Multi Fiscal Sequences Manager </field>
-            <field name="category_id" ref="model_vitt_fiscal_seq_manager" />
-            <field name="implied_ids" eval="[(4, ref('vitt_fiscal_seq_user'))]" />
             <field name="users" eval="[(4, ref('base.user_root'))]" />
         </record>
 
