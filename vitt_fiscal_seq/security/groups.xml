@@ -11,12 +11,15 @@
         </record>
 
 
-<!--         <record id="group_admin_lms" model="res.groups">
+        <record id="group_admin_lms" model="res.groups">
             <field name="name">Admin</field>
-            <field name="category_id" ref="module_category_tools" />
-            <field name="implied_ids" eval="[(4, ref('group_user_lms'))]" />
+            <field name="category_id" ref="model_vitt_fiscal_seq_authorization_code" />
             <field name="users" eval="[(4, ref('base.user_root'))]" />
-        </record> -->
+             <field eval="1" name="perm_read"></field>   
+             <field eval="1" name="perm_write"></field> 
+             <field eval="1" name="perm_unlink"></field>
+             <field eval="1" name="perm_create"></field>
+        </record>
 <!-- 
            <record id="vitt_fiscal_seq_user" model="res.groups">
      <field name="name">Multi Fiscal Sequences User</field>
