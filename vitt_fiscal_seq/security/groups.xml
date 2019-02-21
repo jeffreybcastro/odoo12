@@ -15,10 +15,6 @@
             <field name="name">Admin</field>
             <field name="category_id" ref="model_vitt_fiscal_seq_authorization_code" />
             <field name="users" eval="[(4, ref('base.user_root'))]" />
-             <field eval="1" name="perm_read"></field>   
-             <field eval="1" name="perm_write"></field> 
-             <field eval="1" name="perm_unlink"></field>
-             <field eval="1" name="perm_create"></field>
         </record>
 <!-- 
            <record id="vitt_fiscal_seq_user" model="res.groups">
