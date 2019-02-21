@@ -15,7 +15,7 @@ odoo.define('pos_ticket.models_extend', function (require){
                                         'vitt_max_value',
                                         'fiscal_sequence_regime_ids',
                                         'expiration_date',
-                                        'active',
+                                        'active',   
                                         'prefix'
                                     ], 
                                     domain: [['code','=','pos_order'],['active','=',true]], 
@@ -27,7 +27,7 @@ odoo.define('pos_ticket.models_extend', function (require){
                                     model: 'vitt_fiscal_seq.fiscal_sequence_regime', 
                                     fields: ['authorization_code_id','id','actived'],
                                     // domain: [['id','=',this.get_id_sequence()]],
-                                    domain: function(self){ return [['id','=', self.sequences.fiscal_sequence_regime_ids], [ 'actived','=', true ]]; },
+                                    domain: function(self){ return [[ 'actived','=', true ]]; },
                                     loaded: function(self, fiscal_codes)
                                     {self.fiscal_code = fiscal_codes[0];},
                                 },
@@ -36,6 +36,16 @@ odoo.define('pos_ticket.models_extend', function (require){
     // Order Model hacemos una herencia o extendemos el codigo donde se encuentra la funcion (export_for_printing) que impreme el POS el ticket 
     models.Order = models.Order.extend
     ({
+
+        export_for_printing: function() 
+        {
+            var json = _super_order.export_for_printing.apply(this,arguments);
+            json.subtotal_in_words = this.get_subtotal_in_words();
+            json.get_min_value = this.get_min_value();
+            json.get_max_value = this.get_max_value();
+            return json;
+
+        },
 
         // Agregando los parametros del SAR 
         get_expiration_date : function (sequences) {
@@ -283,14 +293,3 @@ odoo.define('pos_ticket.models_extend', function (require){
     });
 });
 
-
-        // export_for_printing: function() 
-        // {
-        //     var json = _super_order.export_for_printing.apply(this,arguments);
-        //     json.subtotal_in_words = this.get_subtotal_in_words();
-        //     json.get_min_value = this.get_min_value();
-        //     json.get_max_value = this.get_max_value();
-        //     // json.get_cai = this.get_cai();
-        //     return json;
-
-        // },
