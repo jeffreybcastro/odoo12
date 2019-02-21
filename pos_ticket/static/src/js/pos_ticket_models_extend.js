@@ -10,7 +10,7 @@ odoo.define('pos_ticket.models_extend', function (require){
                                     fields: 
                                     [
                                         'code',
-                                        'vitt_number_next_actual',
+                                        'number_next_actual',
                                         'vitt_min_value',
                                         'vitt_max_value',
                                         'fiscal_sequence_regime_ids',
@@ -37,15 +37,15 @@ odoo.define('pos_ticket.models_extend', function (require){
     models.Order = models.Order.extend
     ({
 
-        export_for_printing: function() 
-        {
-            var json = _super_order.export_for_printing.apply(this,arguments);
-            json.subtotal_in_words = this.get_subtotal_in_words();
-            json.get_min_value = this.get_min_value();
-            json.get_max_value = this.get_max_value();
-            return json;
+        // export_for_printing: function() 
+        // {
+        //     var json = _super_order.export_for_printing.apply(this,arguments);
+        //     json.subtotal_in_words = this.get_subtotal_in_words();
+        //     json.get_min_value = this.get_min_value();
+        //     json.get_max_value = this.get_max_value();
+        //     return json;
 
-        },
+        // },
 
         // Agregando los parametros del SAR 
         get_expiration_date : function (sequences) {
@@ -104,7 +104,7 @@ odoo.define('pos_ticket.models_extend', function (require){
                     }
                     return s;
                 }
-            var num =  self.pos.sequences.vitt_number_next_actual++;
+            var num =  self.pos.sequences.number_next_actual++;
 
             return prefix + sequense(num);
             // Funciones que trae el POS predeterminado
