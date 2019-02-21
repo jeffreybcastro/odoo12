@@ -15,7 +15,8 @@ odoo.define('pos_ticket.models_extend', function (require){
                                         'vitt_max_value',
                                         'fiscal_sequence_regime_ids',
                                         'expiration_date',
-                                        'active'
+                                        'active',
+                                        'prefix'
                                     ], 
                                     domain: [['code','=','pos_order'],['active','=',true]], 
                                     loaded: function(self,sequences)
