@@ -24,7 +24,7 @@
 
     <record id="group_manager" model="res.groups">
       <field name="name">Manager</field>
-      <field name="implied_ids" eval="[(4, ref('user_access_rights_demo.group_user'))]"/>
+      <field name="implied_ids" eval="[(4, ref('vitt_fiscal_seq.group_user'))]"/>
       <field name="category_id" ref="vitt_fiscal_seq.module_management"/>
     </record>
 
