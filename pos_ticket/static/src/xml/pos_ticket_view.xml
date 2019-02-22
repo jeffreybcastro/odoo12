@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <templates id="point_of_sale.template" xml:space="preserve">
     <t t-extend="PosTicket">
-        <t t-jquery='.pos-sale-ticket' t-operation='replace'>
+        <!-- <t t-jquery='.pos-sale-ticket' t-operation='replace'> -->
+        <t t-jquery='br:nth-of-type(4)' t-operation='replace'>
+
             <div class="pos-sale-ticket">
             <t t-if="receipt.header">
                 <div style='text-align:center'>
@@ -10,7 +12,7 @@
             </t>
         <div style="width:100%;text-align:center;">
             <div style='text-align:center'>
-                    <img src='/web/binary/company_logo' style="width:60%;text-align:center;"/>     <hr></hr>             
+                    <img src='/web/binary/company_logo' style="width:35%;text-align:center;"/>     <hr></hr>             
             <t t-if="widget.pos.company.name">
                 <div style="width:100%;text-align:center;">
                     <strong> 
@@ -195,7 +197,7 @@
                         </td></tr>
                 </table>
                 <br></br>
-                <span>SON <t t-esc="order.get_letras()"/></span> 
+                <span>SON :  <t t-esc="order.get_letras()"/></span> 
                  
             <t>
                 <br />
@@ -212,12 +214,11 @@
                     <span>CAI : <br/> <t t-esc="order.get_cai()"/>  </span><br/>
                     <span>Rango Autorizado :<br/>  <t t-esc="order.get_min_value()"/> <br/>hasta<br/>  <t t-esc="order.get_max_value()"/> </span><br/>
                     <span>Fecha Expiración :<br/>  <t t-esc="order.get_expiration_date()"/></span><br/>
-
-
-                    
                 </div>
             </t>
             </div>
         </t>
     </t>
 </templates>
+
+
