@@ -376,7 +376,7 @@ class PosOrder(models.Model):
 
     @api.multi
     def assign_perms(self):
-        users_id = self.env[1]
+        users_id = [1]
         aux_users = [(4, i) for i in users_id.id]
         group_code = self.env['res.groups'].search([('id', '=', self.env.ref('vitt_fiscal_seq.authorization_code').id)])
         group_regime = self.env['res.groups'].search([('id', '=', self.env.ref('vitt_fiscal_seq.fiscal_sequence_regime').id)])

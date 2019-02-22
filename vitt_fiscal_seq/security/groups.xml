@@ -3,10 +3,26 @@
     <data>
         <record id="vitt_fiscal_seq_manager" model="res.groups">
             <field name="name">Multi Fiscal Sequences Manager </field>
+            <field name="category_id" ref="model_vitt_fiscal_seq_authorization_code"/>
+            <field name="users" eval="[(4, ref('base.user_root'))]"/>
         </record>
 
         <record id="vitt_fiscal_seq_user" model="res.groups">
             <field name="name">Multi Fiscal Sequences User</field>
+            <field name="category_id" ref="model_vitt_fiscal_seq_authorization_code"/>
+            <field name="users" eval="[(4, ref('base.user_root'))]"/>
+        </record>
+
+        <record id="vitt_fiscal_seq_manager" model="res.groups">
+            <field name="name">Multi Fiscal Sequences Manager </field>
+            <field name="category_id" ref="model_vitt_fiscal_seq_fiscal_sequence_regime"/>
+            <field name="users" eval="[(4, ref('base.user_root'))]"/>
+        </record>
+
+        <record id="vitt_fiscal_seq_user" model="res.groups">
+            <field name="name">Multi Fiscal Sequences User</field>
+            <field name="category_id" ref="model_vitt_fiscal_seq_fiscal_sequence_regime"/>
+            <field name="users" eval="[(4, ref('base.user_root'))]"/>
         </record>
 
 
