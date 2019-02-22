@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <templates id="point_of_sale.template" xml:space="preserve">
     <t t-extend="PosTicket">
-        <!-- <t t-jquery='.pos-sale-ticket' t-operation='replace'> -->
-        <t t-jquery='br:nth-of-type(4)' t-operation='replace'>
+        <t t-jquery='.pos-sale-ticket' t-operation='replace'>
+        <!-- <t t-jquery='br:nth-of-type(4)' t-operation='replace'> -->
 
             <div class="pos-sale-ticket">
             <t t-if="receipt.header">
@@ -21,12 +21,10 @@
                     </strong> 
                 </div>
             </t>
-                
-
                 <t>
                 <div > 
-                        <span style="width:100%;text-align:center;" >RTN : </span><t t-esc="widget.pos.company.vat"/><br />
-                    </div>
+                    <span style="width:100%;text-align:center;" >RTN : </span><t t-esc="widget.pos.company.vat"/><br />
+                </div>
                 </t>
                 <t t-if="widget.pos.company.email">
                     <div style="width:100%;text-align:center;"><t t-esc="widget.pos.company.email"/>
@@ -35,39 +33,20 @@
                 </t>
                 <t t-if="widget.pos.company.phone">
                     <div style="width:100%;text-align:center;"><t t-esc="widget.pos.company.phone"/></div>
-
                 </t>
                 <t>
                     <div style="width:100%;text-align:center;">
-                        <!-- <t t-esc="widget.pos.company.street"/><br /> -->
-                        <!-- <t t-esc="widget.pos.company.vat_label"/> -->
-                        <!-- <t t-esc="order.get_addre()"/> -->
-                        <t t-esc='receipt.company.vat_label' />
-                        
+                        <t t-esc='receipt.company.vat_label' />  
                     </div>
-
                 </t>
                 <t>
                     <div style="width:100%;text-align:center;">
                         <t t-esc="widget.pos.company.website"/>
-
                     </div>
                 </t>
             </div>
         </div>
 <hr></hr>
-            <script type="text/javascript" > 
-                
-                
-             
-            </script>
-
-        
-                 <!-- <h3>Factura<t t-esc="widget.pos.name"/></h3> -->
-                 <!-- <t t-esc="widget.orders.pos_reference "/> -->
-                 <!-- <t t-esc="receipt.propiedad_1"/><br /> -->
-
-                 <!-- <t t-esc='receipt.pos_reference' /> -->
                 <div style="width: 100%; float: left; padding: 0px 0px;">
                                <strong>Factura : <t t-esc="order.get_subtotal_in_words()"/></strong><br/>    
                         <t t-if="order.get_client()">
@@ -105,14 +84,9 @@
                         </td>
                         <td style='text-align:left'>
                             <t t-esc="orderline.get_quantity() + ' ' + orderline.get_unit().name"/>
-                            <!-- <t t-esc="orderline.get_unit().name"/> -->
                         </td>
                         <td style='text-align:center'>
                         	<t t-esc="orderline.get_display_price()"/>
-<!--                             <t t-set="a" t-value="orderline.quantityStr"></t>
-                            <t t-set="b" t-value="orderline.get_display_price()"></t>
-                            <t t-set="c" t-value="b/a"></t>
-                            <t t-esc="c"/> -->
                         </td>
                         <td style='text-align:right'>
                             <t t-esc="widget.format_currency(orderline.get_display_price())"/>
@@ -200,15 +174,9 @@
                 <span>SON :  <t t-esc="order.get_letras()"/></span> 
                  
             <t>
-                <br />
+                <br/>
                 <div style='text-align:center' >
-                    <!-- <hr></hr> -->
-                    <!-- <span>CAI:<br /></span><t t-esc="widget.pos.cai.name"/>  <br /> -->
-                    <!-- <span>Rango Autorizado:</span><br/> -->
-                    <!-- <t t-esc="widget.pos.cai.desde_"/> <br />Hasta <br /> -->
-                    <!-- <t t-esc="widget.pos.cai.hasta_"/> -->
                     <br/>
-                    <!-- <span>Fecha Limite : </span><t t-esc="widget.pos.cai.fech_limit"/> -->
                     <hr></hr>
                     <t t-esc="receipt.footer" />
                     <span>CAI : <br/> <t t-esc="order.get_cai()"/>  </span><br/>
@@ -216,6 +184,8 @@
                     <span>Fecha Expiración :<br/>  <t t-esc="order.get_expiration_date()"/></span><br/>
                 </div>
             </t>
+
+
             </div>
         </t>
     </t>
