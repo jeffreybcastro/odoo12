@@ -30,7 +30,7 @@
         "views/ir_sequence_view.xml",
         "views/account_invoice_view.xml",
         "reports/account_report.xml",
-        "views/pos_view_update.xml",
+        #"views/pos_view_update.xml",
         
     ],
     'demo': [],
