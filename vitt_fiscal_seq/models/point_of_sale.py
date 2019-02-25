@@ -8,7 +8,7 @@ from datetime import datetime
 class PosOrder(models.Model):
     _inherit = "pos.order"
 
-    sar_number = fields.Char(string='Número de Factura', readonly=True, default=False, help="Unique number of the invoice, computed automatically when the invoice is created.", copy=False)
+    #sar_number = fields.Char(string='Número de Factura', readonly=True, default=False, help="Unique number of the invoice, computed automatically when the invoice is created.", copy=False)
     
     @api.multi
     def create(self,values):
