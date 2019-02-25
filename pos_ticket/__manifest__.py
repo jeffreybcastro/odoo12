@@ -30,7 +30,7 @@
     'website': 'www.D2i-Solutions.com',
     'category': 'Point Of Sale',
     'depends': ['base', 
-    #'point_of_sale'
+    'point_of_sale'
     ],
     'license': 'AGPL-3',
     'data': [
