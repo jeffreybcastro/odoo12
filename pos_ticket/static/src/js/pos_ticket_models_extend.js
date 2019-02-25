@@ -18,7 +18,7 @@ odoo.define('pos_ticket.models_extend', function (require){
                                         'active',   
                                         'prefix'
                                     ], 
-                                    domain: [['code','=','pos_order'],['active','=',true]], 
+                                    domain: [['code','=','pos_order'],['active','=',true],['fiscal_sequence_regime_ids','=',self.pos.fiscal_codes.id]], 
                                     loaded: function(self,sequences)
                                     {self.sequences = sequences[0];},
                                 },
@@ -27,8 +27,7 @@ odoo.define('pos_ticket.models_extend', function (require){
                                     model: 'vitt_fiscal_seq.fiscal_sequence_regime', 
                                     fields: ['authorization_code_id','id','actived'],
                                     // domain: [['id','=',this.get_id_sequence()]],
-                                    domain: function(self){ return [[ 'authorization_code_id'=this.pos.sequences.fiscal_sequence_regime_ids]
-                                    ,['actived','=', true ]]; },
+                                    domain: function(self){ return [['actived','=', true ]]; },
                                     loaded: function(self, fiscal_codes)
                                     {self.fiscal_code = fiscal_codes[0];},
                                 },
