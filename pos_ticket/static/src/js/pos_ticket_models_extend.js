@@ -18,16 +18,16 @@ odoo.define('pos_ticket.models_extend', function (require){
                                         'active',   
                                         'prefix'
                                     ], 
-                                    domain: [['code','=','pos_order'],['active','=',true],['fiscal_sequence_regime_ids','=',self.pos.fiscal_codes.id]], 
+                                    domain: [['code','=','pos_order'],['active','=',true]], 
                                     loaded: function(self,sequences)
                                     {self.sequences = sequences[0];},
                                 },
                                 // Carga el modulo del SAR
                                 {
                                     model: 'vitt_fiscal_seq.fiscal_sequence_regime', 
-                                    fields: ['authorization_code_id','id','actived'],
+                                    fields: ['authorization_code_id','id','actived','sequence_id'],
                                     // domain: [['id','=',this.get_id_sequence()]],
-                                    domain: function(self){ return [['actived','=', true ]]; },
+                                    domain: function(self){ return [['actived','=', true ],['sequence_id','=', self.pos.sequences.fiscal_sequence_regime_ids]]; },
                                     loaded: function(self, fiscal_codes)
                                     {self.fiscal_code = fiscal_codes[0];},
                                 },
@@ -89,7 +89,7 @@ odoo.define('pos_ticket.models_extend', function (require){
             return get_addre;
         },
 
-        get_subtotal_in_words: function(sequences){
+        get_number_invoice: function(sequences){
             // Generamos la secuencia que solicita el SAR 000-000-000-00000000 atravez de una funcion pasandole como parametro
             // el Numero siguiente que se creo en la secuencia del POS.
             self = this;
