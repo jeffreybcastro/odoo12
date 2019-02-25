@@ -27,7 +27,8 @@ odoo.define('pos_ticket.models_extend', function (require){
                                     model: 'vitt_fiscal_seq.fiscal_sequence_regime', 
                                     fields: ['authorization_code_id','id','actived'],
                                     // domain: [['id','=',this.get_id_sequence()]],
-                                    domain: function(self){ return [['actived','=', true ]]; },
+                                    domain: function(self){ return [[ 'authorization_code_id'=this.pos.sequences.fiscal_sequence_regime_ids]
+                                    ,['actived','=', true ]]; },
                                     loaded: function(self, fiscal_codes)
                                     {self.fiscal_code = fiscal_codes[0];},
                                 },
@@ -36,6 +37,7 @@ odoo.define('pos_ticket.models_extend', function (require){
     // Order Model hacemos una herencia o extendemos el codigo donde se encuentra la funcion (export_for_printing) que impreme el POS el ticket 
     models.Order = models.Order.extend
     ({
+
         // export_for_printing: function() 
         // {
         //     var json = _super_order.export_for_printing.apply(this,arguments);
@@ -50,37 +52,50 @@ odoo.define('pos_ticket.models_extend', function (require){
         get_expiration_date : function (sequences) {
             // Fecha de Expiracion...
             self = this;
-             return self.pos.sequences.expiration_date;    
+            var expiration_date =  self.pos.sequences.expiration_date;
+            return expiration_date;
         },
+
         get_id_sequence : function (sequences) {
             // body...
-            self = this; 
-            return self.pos.sequences.id[1];
+            self = this;
+            var id_sequence =  self.pos.sequences.id[1];
+            return id_sequence;
         },
+
         get_min_value: function(sequences) {
             // El rango Autorizado Minimo que las facturas pueden ser impresas.
             self = this;
-            return self.pos.sequences.vitt_min_value;
+            var min_value =  self.pos.sequences.vitt_min_value;
+            return min_value;
         },
+
         get_max_value: function(sequences) {
             // El rango Autorizado Maximo que las facturas pueden ser impresas.
             self = this;
-            return self.pos.sequences.vitt_max_value;
+            var max_value =  self.pos.sequences.vitt_max_value;
+            return max_value;
         },
+
         get_cai: function(fiscal_code) {
             // CAI autorizado para la autoimpresion
             self = this;
-            return self.pos.fiscal_code.authorization_code_id[1];
+            var cai =  self.pos.fiscal_code.authorization_code_id[1];
+            return cai;
         },
         get_addre :function (companies) {
             // La direccion de la Empresa
-            self = this; 
-            return self.pos.companies.street;
+            self = this;
+            get_addre =  self.pos.companies.street;
+            return get_addre;
         },
+
         get_subtotal_in_words: function(sequences){
             // Generamos la secuencia que solicita el SAR 000-000-000-00000000 atravez de una funcion pasandole como parametro
             // el Numero siguiente que se creo en la secuencia del POS.
             self = this;
+            var prefix = self.pos.sequences.prefix;
+
             function sequense(num)
                 { 
                     var s = ""+ num;
@@ -91,11 +106,14 @@ odoo.define('pos_ticket.models_extend', function (require){
                     return s;
                 }
             var num =  self.pos.sequences.number_next_actual++;
-            return self.pos.sequences.prefix + sequense(num);
+
+            return prefix + sequense(num);
             // Funciones que trae el POS predeterminado
             // this.pos.click_next();
             // this.pos.set_next_number.destroy();
         },
+
+
     get_letras : function ()
     {      
     var numeroALetras = (function() {
