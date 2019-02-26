@@ -16,7 +16,7 @@ odoo.define('pos_ticket.models_extend', function (require){
                                         'fiscal_sequence_regime_ids',
                                         'expiration_date',
                                         'active',   
-                                        'prefix',
+                                        'vitt_prefix',
                                         'id'
                                     ], 
                                     domain: [['code','=','pos_order'],['active','=',true]], 
@@ -94,7 +94,7 @@ odoo.define('pos_ticket.models_extend', function (require){
             // Generamos la secuencia que solicita el SAR 000-000-000-00000000 atravez de una funcion pasandole como parametro
             // el Numero siguiente que se creo en la secuencia del POS.
             self = this;
-            var prefix = self.pos.sequences.prefix;
+            var prefix = self.pos.sequences.vitt_prefix;
 
             function sequense(num)
                 { 
