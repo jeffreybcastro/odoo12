@@ -16,7 +16,7 @@
     'maintainer': '',
     'contributors': '',
     'category': 'Extra Tools',
-    'depends': ['base', 'account','point_of_sale'],
+    'depends': ['base', 'account'],
     # "update_xml" : ["account_invoice_view.xml", ],
     'data': [
         "security/groups.xml",

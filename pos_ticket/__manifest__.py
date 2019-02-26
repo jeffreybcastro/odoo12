@@ -29,7 +29,7 @@
     'company': 'D2i Solutions',
     'website': 'www.D2i-Solutions.com',
     'category': 'Point Of Sale',
-    'depends': ['base','point_of_sale'],
+    'depends': ['base'],
     'license': 'AGPL-3',
     'data': [
     'static/src/xml/custom_pos_view.xml'
