@@ -24,14 +24,14 @@ odoo.define('pos_ticket.models_extend', function (require){
                                     {self.sequences = sequences[0];},
                                 },
                                 // Carga el modulo del SAR
-                                {
-                                    model: 'vitt_fiscal_seq.fiscal_sequence_regime', 
-                                    fields: ['authorization_code_id','id','actived','sequence_id'],
-                                    // domain: [['id','=',this.get_id_sequence()]],
-                                    domain: function(self){ return [['actived','=', true ]]; },
-                                    loaded: function(self, fiscal_codes)
-                                    {self.fiscal_code = fiscal_codes[0];},
-                                },
+                                // {
+                                //     model: 'vitt_fiscal_seq.fiscal_sequence_regime', 
+                                //     fields: ['authorization_code_id','id','actived','sequence_id'],
+                                //     // domain: [['id','=',this.get_id_sequence()]],
+                                //     domain: function(self){ return [['actived','=', true ]]; },
+                                //     loaded: function(self, fiscal_codes)
+                                //     {self.fiscal_code = fiscal_codes[0];},
+                                // },
                         ]);
 
     // Order Model hacemos una herencia o extendemos el codigo donde se encuentra la funcion (export_for_printing) que impreme el POS el ticket 
@@ -77,12 +77,12 @@ odoo.define('pos_ticket.models_extend', function (require){
             return max_value;
         },
 
-        get_cai: function(fiscal_code) {
-            // CAI autorizado para la autoimpresion
-            self = this;
-            var cai =  self.pos.fiscal_code.authorization_code_id[1];
-            return cai;
-        },
+        // get_cai: function(fiscal_code) {
+        //     // CAI autorizado para la autoimpresion
+        //     self = this;
+        //     var cai =  self.pos.fiscal_code.authorization_code_id[1];
+        //     return cai;
+        // },
         get_addre :function (companies) {
             // La direccion de la Empresa
             self = this;
