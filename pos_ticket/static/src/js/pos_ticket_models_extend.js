@@ -16,7 +16,7 @@ odoo.define('pos_ticket.models_extend', function (require){
                                         'fiscal_sequence_regime_ids',
                                         'expiration_date',
                                         'active',   
-                                        'vitt_prefix',
+                                        'prefix',
                                         'id'
                                     ], 
                                     domain: [['code','=','pos_order'],['active','=',true]], 
@@ -56,12 +56,12 @@ odoo.define('pos_ticket.models_extend', function (require){
             return expiration_date;
         },
 
-        get_id_sequence : function (sequences) {
-            // body...
-            self = this;
-            var id_sequence =  self.pos.sequences.id[1];
-            return id_sequence;
-        },
+        // get_id_sequence : function (sequences) {
+        //     // body...
+        //     self = this;
+        //     var id_sequence =  self.pos.sequences.id[1];
+        //     return id_sequence;
+        // },
 
         get_min_value: function(sequences) {
             // El rango Autorizado Minimo que las facturas pueden ser impresas.
@@ -81,20 +81,20 @@ odoo.define('pos_ticket.models_extend', function (require){
         //     // CAI autorizado para la autoimpresion
         //     self = this;
         //     var cai =  self.pos.fiscal_code.authorization_code_id[1];
-        //     return cai;
+        // //     return cai;
+        // // },
+        // get_addre :function (companies) {
+        //     // La direccion de la Empresa
+        //     self = this;
+        //     get_addre =  self.pos.companies.street;
+        //     return get_addre;
         // },
-        get_addre :function (companies) {
-            // La direccion de la Empresa
-            self = this;
-            get_addre =  self.pos.companies.street;
-            return get_addre;
-        },
 
         get_number_invoice: function(sequences){
             // Generamos la secuencia que solicita el SAR 000-000-000-00000000 atravez de una funcion pasandole como parametro
             // el Numero siguiente que se creo en la secuencia del POS.
             self = this;
-            var prefix = self.pos.sequences.vitt_prefix;
+            var prefix_ = self.pos.sequences.prefix;
 
             function sequense(num)
                 { 
@@ -107,7 +107,7 @@ odoo.define('pos_ticket.models_extend', function (require){
                 }
             var num =  self.pos.sequences.number_next_actual++;
 
-            return prefix + sequense(num);
+            return prefix_ + sequense(num);
             // Funciones que trae el POS predeterminado
             // this.pos.click_next();
             // this.pos.set_next_number.destroy();
