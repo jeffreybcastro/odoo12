@@ -21,14 +21,14 @@ odoo.define('pos_ticket.models_extend', function (require){
                                     ], 
                                     domain: [['code','=','pos_order'],['active','=',true]], 
                                     loaded: function(self,sequences)
-                                    {self.sequences = sequences[0];},
+                                    {self.sequence = sequences[0];},
                                 },
                                 // Carga el modulo del SAR
                                 {
                                     model: 'vitt_fiscal_seq.fiscal_sequence_regime', 
                                     fields: ['authorization_code_id','id','actived','sequence_id'],
                                     // domain: [['id','=',this.get_id_sequence()]],
-                                    domain: function(self){ return [['actived','=', true ],['sequence_id','=', self.sequences.id],['user_ids','=' self.user.id]];},
+                                    domain: function(self){ return [['actived','=', true ],['sequence_id','=', self.sequence.id];},
                                     loaded: function(self, fiscal_codes)
                                     {self.fiscal_code = fiscal_codes[0];},
                                 },
@@ -49,31 +49,31 @@ odoo.define('pos_ticket.models_extend', function (require){
         // },
 
         // Agregando los parametros del SAR 
-        get_expiration_date : function (sequences) {
+        get_expiration_date : function (sequence) {
             // Fecha de Expiracion...
             self = this;
-            var expiration_date =  self.pos.sequences.expiration_date;
+            var expiration_date =  self.pos.sequence.expiration_date;
             return expiration_date;
         },
 
-        get_id_sequence : function (sequences) {
+        get_id_sequence : function (sequence) {
             // body...
             self = this;
-            var id_sequence =  self.pos.sequences.fiscal_sequence_regime_ids;
+            var id_sequence =  self.pos.sequence.fiscal_sequence_regime_ids;
             return id_sequence;
         },
 
-        get_min_value: function(sequences) {
+        get_min_value: function(sequence) {
             // El rango Autorizado Minimo que las facturas pueden ser impresas.
             self = this;
-            var min_value =  self.pos.sequences.vitt_min_value;
+            var min_value =  self.pos.sequence.vitt_min_value;
             return min_value;
         },
 
-        get_max_value: function(sequences) {
+        get_max_value: function(sequence) {
             // El rango Autorizado Maximo que las facturas pueden ser impresas.
             self = this;
-            var max_value =  self.pos.sequences.vitt_max_value;
+            var max_value =  self.pos.sequence.vitt_max_value;
             return max_value;
         },
 
@@ -90,11 +90,11 @@ odoo.define('pos_ticket.models_extend', function (require){
             return get_addre;
         },
 
-        get_number_invoice: function(sequences){
+        get_number_invoice: function(sequence){
             // Generamos la secuencia que solicita el SAR 000-000-000-00000000 atravez de una funcion pasandole como parametro
             // el Numero siguiente que se creo en la secuencia del POS.
             self = this;
-            var prefix = self.pos.sequences.prefix;
+            var prefix = self.pos.sequence.prefix;
 
             function sequense(num)
                 { 
@@ -105,7 +105,7 @@ odoo.define('pos_ticket.models_extend', function (require){
                     }
                     return s;
                 }
-            var num =  self.pos.sequences.number_next_actual++;
+            var num =  self.pos.sequence.number_next_actual++;
 
             return prefix + sequense(num);
             // Funciones que trae el POS predeterminado
