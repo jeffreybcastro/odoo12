@@ -38,7 +38,7 @@
     'images': ['static/description/banner.jpg'],
     'demo': [],
     'installable': True,
-    'application': True,
+    'application': False,
     'auto_install': False,
     'active' : False,
 
