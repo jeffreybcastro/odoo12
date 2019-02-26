@@ -16,7 +16,8 @@ odoo.define('pos_ticket.models_extend', function (require){
                                         'fiscal_sequence_regime_ids',
                                         'expiration_date',
                                         'active',   
-                                        'prefix'
+                                        'prefix',
+                                        'id'
                                     ], 
                                     domain: [['code','=','pos_order'],['active','=',true]], 
                                     loaded: function(self,sequences)
