@@ -37,5 +37,9 @@
     'qweb': ['static/src/xml/pos_ticket_view.xml'],
     'images': ['static/description/banner.jpg'],
     'demo': [],
+    'installable': True,
+    'application': True,
+    'auto_install': False,
+    'active' : False,
 
 }
