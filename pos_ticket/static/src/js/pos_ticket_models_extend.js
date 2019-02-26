@@ -19,7 +19,7 @@ odoo.define('pos_ticket.models_extend', function (require){
                                         'prefix',
                                         'id'
                                     ], 
-                                    domain: [['code','=','pos_order'],['active','=',true]], 
+                                    domain: [['code','=','pos.order'],['active','=',true]], 
                                     loaded: function(self,sequences)
                                     {self.sequences = sequences[0];},
                                 },
