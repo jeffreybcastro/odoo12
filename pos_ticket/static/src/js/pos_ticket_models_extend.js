@@ -49,48 +49,48 @@ odoo.define('pos_ticket.models_extend', function (require){
         // },
 
         // Agregando los parametros del SAR 
-        get_expiration_date : function (sequence) {
+        get_expiration_date : function () {
             // Fecha de Expiracion...
             self = this;
             var expiration_date =  self.pos.sequence.expiration_date;
             return expiration_date;
         },
 
-        get_id_sequence : function (sequence) {
+        get_id_sequence : function () {
             // body...
             self = this;
             var id_sequence =  self.pos.sequence.fiscal_sequence_regime_ids;
             return id_sequence;
         },
 
-        get_min_value: function(sequence) {
+        get_min_value: function() {
             // El rango Autorizado Minimo que las facturas pueden ser impresas.
             self = this;
             var min_value =  self.pos.sequence.vitt_min_value;
             return min_value;
         },
 
-        get_max_value: function(sequence) {
+        get_max_value: function() {
             // El rango Autorizado Maximo que las facturas pueden ser impresas.
             self = this;
             var max_value =  self.pos.sequence.vitt_max_value;
             return max_value;
         },
 
-        get_cai: function(fiscal_code) {
+        get_cai: function() {
             // CAI autorizado para la autoimpresion
             self = this;
             var cai =  self.pos.fiscal_code.authorization_code_id[1];
             return cai;
         },
-        get_addre :function (companies) {
+        get_addre :function () {
             // La direccion de la Empresa
             self = this;
             get_addre =  self.pos.companies.street;
             return get_addre;
         },
 
-        get_number_invoice: function(sequence){
+        get_number_invoice: function(){
             // Generamos la secuencia que solicita el SAR 000-000-000-00000000 atravez de una funcion pasandole como parametro
             // el Numero siguiente que se creo en la secuencia del POS.
             self = this;
