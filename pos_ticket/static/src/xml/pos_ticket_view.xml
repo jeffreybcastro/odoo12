@@ -179,7 +179,7 @@
                     <br/>
                     <hr></hr>
                     <t t-esc="receipt.footer" />
-                    <span>CAI : <br/> <t t-esc="order.get_cai()"/>  </span><br/>
+                    <!-- <span>CAI : <br/> <t t-esc="order.get_cai()"/>  </span><br/> -->
                     <span>Rango Autorizado :<br/>  <t t-esc="order.get_min_value()"/> <br/>hasta<br/>  <t t-esc="order.get_max_value()"/> </span><br/>
                     <span>Fecha Expiración :<br/>  <t t-esc="order.get_expiration_date()"/></span><br/>
                 </div>
