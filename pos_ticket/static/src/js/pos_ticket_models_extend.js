@@ -19,7 +19,7 @@ odoo.define('pos_ticket.models_extend', function (require){
                                         'prefix',
                                         'id'
                                     ], 
-                                    domain: [['code','=','pos.order'],['active','=',true]], 
+                                    domain: [['code','=','pos_order'],['active','=',true]], 
                                     loaded: function(self,sequences)
                                     {self.sequences = sequences[0];},
                                 },
@@ -90,28 +90,28 @@ odoo.define('pos_ticket.models_extend', function (require){
         //     return get_addre;
         // },
 
-        get_number_invoice: function(sequences){
-            // Generamos la secuencia que solicita el SAR 000-000-000-00000000 atravez de una funcion pasandole como parametro
-            // el Numero siguiente que se creo en la secuencia del POS.
-            self = this;
-            var prefix_ = self.pos.sequences.prefix;
+        // get_number_invoice: function(sequences){
+        //     // Generamos la secuencia que solicita el SAR 000-000-000-00000000 atravez de una funcion pasandole como parametro
+        //     // el Numero siguiente que se creo en la secuencia del POS.
+        //     self = this;
+        //     var prefix_ = self.pos.sequences.prefix;
 
-            function sequense(num)
-                { 
-                    var s = ""+ num;
-                    while (s.length < 8)
-                    {
-                        s = "0" + s;
-                    }
-                    return s;
-                }
-            var num =  self.pos.sequences.number_next_actual++;
+        //     function sequense(num)
+        //         { 
+        //             var s = ""+ num;
+        //             while (s.length < 8)
+        //             {
+        //                 s = "0" + s;
+        //             }
+        //             return s;
+        //         }
+        //     var num =  self.pos.sequences.number_next_actual++;
 
-            return prefix_ + sequense(num);
-            // Funciones que trae el POS predeterminado
-            // this.pos.click_next();
-            // this.pos.set_next_number.destroy();
-        },
+        //     return prefix_ + sequense(num);
+        //     // Funciones que trae el POS predeterminado
+        //     // this.pos.click_next();
+        //     // this.pos.set_next_number.destroy();
+        // },
 
 
     get_letras : function ()
