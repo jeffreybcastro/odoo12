@@ -16,7 +16,9 @@
     'maintainer': '',
     'contributors': '',
     'category': 'Extra Tools',
-    'depends': ['base', 'account','point_of_sale'],
+    'depends': ['base', 'account',
+    #'point_of_sale'
+    ],
     # "update_xml" : ["account_invoice_view.xml", ],
     'data': [
         "security/groups.xml",
@@ -27,12 +29,12 @@
         "views/ir_sequence_view.xml",
         "views/account_invoice_view.xml",
         "reports/account_report.xml",
-        "views/pos_view_update.xml",
+        #"views/pos_view_update.xml",
         
     ],
     'demo': [],
     'installable': True,
     'application': True,
-    'auto_install': False,
-    'active' : False,
+    'auto_install': True,
+    'active' : True,
 }
