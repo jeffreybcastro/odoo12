@@ -1,9 +1,5 @@
 # -*- coding: utf-8 -*-
 from odoo import models, fields, api, _
-from odoo.exceptions import Warning
-import itertools
-from datetime import date
-from datetime import datetime
 
 class PosOrder(models.Model):
     _inherit = "pos.order"
