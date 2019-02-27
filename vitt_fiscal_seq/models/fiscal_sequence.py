@@ -37,6 +37,7 @@ class Authorization(models.Model):
         '000-001-05-' : '05 Retención',
         '000-001-07-' : '07 Notas de Débito',
         '000-001-08-' : '08 Guía de de Remisión'
+        '000-001-01' : '09 POS'
         }
         lst = []
         for x in dicc.items():
