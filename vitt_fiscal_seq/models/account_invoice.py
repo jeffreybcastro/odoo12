@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+
 from odoo import models, fields, api, _
 from odoo.exceptions import Warning
 import itertools
@@ -38,8 +39,8 @@ class AccountInvoice(models.Model):
     @api.multi
     @api.depends("company_id")
     def _default_fiscal_validated(self, company_id):
-        if self.company_id:
-            fiscal_sequence_ids = self.env["vitt_fiscal_seq.authorization_code"].search([('company_id', '=', self.company_id.id), ('active', '=', True)])
+        if company_id:
+            fiscal_sequence_ids = self.env["vitt_fiscal_seq.authorization_code"].search([('company_id', '=', company_id), ('active', '=', True)])
             if fiscal_sequence_ids:
                 return True
             else:
@@ -284,7 +285,7 @@ class AccountInvoice(models.Model):
             vals["fiscal_control"] = 0
             vals["sequence_ids"] = 0
             if vals.get("company_id"):
-                vals["fiscal_control"] = self._default_fiscal_validated(self.company_id) #vals.get("company_id"))
+                vals["fiscal_control"] = self._default_fiscal_validated(self.company_id)#vals.get("company_id"))
             else:
                 company_id = self.env["res.users"].browse(vals.get("user_id")).company_id.id
                 vals["fiscal_control"] = self._default_fiscal_validated(company_id)
@@ -362,14 +363,26 @@ class AccountInvoice(models.Model):
 # class PosOrder(models.Model):
 #     _inherit = "pos.order"
 
-#     # sar_number = fields.Char(string='Número de Factura', readonly=True, default=False, help="Unique number of the invoice, computed automatically when the invoice is created.", copy=False)
-    
+#     sar_number = fields.Char(string='Número de Factura', readonly=True, default=False, help="Unique number of the invoice, computed automatically when the invoice is created.", copy=False)
+#     sequence_ids = fields.Many2one("ir.sequence", "Fiscal Number", states={'draft': [('readonly', False)]},
+#                                    domain="[('is_fiscal_sequence', '=',True),('active', '=', True), '|',('code','=', type),('code','=', 'in_refund'),('journal_id', '=', journal_id), '|', ('user_ids','=',False),('user_ids','=', user_id)]")
 #     @api.multi
 #     def create(self,values):
+
+#         # sequen_code = self.env["ir.sequence"].search([('code', '=', 'pos_order'), ('active', '=', True)])
+        
+#         # today = datetime.today().date()
+#         # obj_date = datetime.strptime(sequen_code.expiration_date, '%Y-%m-%d')
+#         # if today > obj_date.date():
+#         #     raise Warning(_('The Expiration Date for this fiscal sequence is   %s ') % ( sequen_code.expiration_date))
+#         # elif sequen_code.vitt_number_next_actual < sequen_code.max_value:
+#         #         raise Warning(_('The range of sequence numbers is finished'))
+#         # else:
 #         new_name = self.env['ir.sequence'].next_by_code('pos_order')
 #         values['pos_reference'] = new_name
-#         # values['name'] = new_name
-#         # for pos in self:
-#         #     pos.write({'name': new_name})
+#             # values['name'] = new_name
+#             # for pos in self:
+#             #     pos.write({'name': new_name})
 #         res = super(PosOrder, self).create(values)
 #         return res
+
