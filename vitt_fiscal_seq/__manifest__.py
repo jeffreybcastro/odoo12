@@ -16,12 +16,10 @@
     'maintainer': '',
     'contributors': '',
     'category': 'Extra Tools',
-    'depends': ['base', 'account', 'vitt_jrseq',
-    #'point_of_sale'
-    ],
+    'depends': ['base', 'account', 'vitt_jrseq'],
     'data': [
-        "security/groups.xml",
-        "security/ir.model.access.csv",
+        #"security/groups.xml",
+        #"security/ir.model.access.csv",
         "wizard/journal_settings_view.xml",
         "views/config_journal_view.xml",
         "views/config_authorization_code_view.xml",
