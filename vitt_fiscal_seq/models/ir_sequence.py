@@ -14,9 +14,9 @@ class Sequence(models.Model):
     vitt_max_value = fields.Char('Max number', readonly=True)
     percentage_alert = fields.Float('percentage alert', default=80)
     percentage = fields.Float('percentage', compute='compute_percentage')
-    vitt_prefix = fields.Char(string= 'Vitt Prefix', related='prefix')
-    vitt_padding = fields.Integer(string= 'Vitt Padding',related='padding')
-    vitt_number_next_actual = fields.Integer(string= 'Vitt number next actual',related='number_next_actual')
+    vitt_prefix = fields.Char('Prefix', related='prefix')
+    vitt_padding = fields.Integer('Number padding', related='padding')
+    vitt_number_next_actual = fields.Integer('Next Number', related='number_next_actual')
     is_fiscal_sequence = fields.Boolean("Fiscal sequence")
     user_ids = fields.Many2many("res.users", string="Users")
 

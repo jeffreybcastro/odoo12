@@ -16,9 +16,7 @@
     'maintainer': '',
     'contributors': '',
     'category': 'Extra Tools',
-    'depends': ['base', 'account','vitt_jrseq'
-    ],
-    # "update_xml" : ["account_invoice_view.xml", ],
+    'depends': ['base', 'account', 'vitt_jrseq','point_of_sale'],
     'data': [
         "security/groups.xml",
         "security/ir.model.access.csv",
@@ -28,12 +26,12 @@
         "views/ir_sequence_view.xml",
         "views/account_invoice_view.xml",
         "reports/account_report.xml",
-        #"views/pos_view_update.xml",
+        "views/pos_view_update.xml",
         
     ],
-    'demo': [],
+    'demo': [
+    ],
     'installable': True,
     'application': True,
-    'auto_install': True,
-    'active' : True,
+    'auto_install': False,
 }

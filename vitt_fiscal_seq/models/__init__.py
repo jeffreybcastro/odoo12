@@ -7,6 +7,5 @@ from . import  ir_sequence
 from . import  account
 from . import account_invoice
 from . import fiscal_sequence
-#from . import point_of_sale
 
 
