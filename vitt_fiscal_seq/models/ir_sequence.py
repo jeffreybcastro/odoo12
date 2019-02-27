@@ -16,7 +16,7 @@ class Sequence(models.Model):
     percentage = fields.Float('percentage', compute='compute_percentage')
     vitt_prefix = fields.Char(string= 'Vitt Prefix', related='prefix')
     vitt_padding = fields.Integer(string= 'Vitt Padding',related='padding')
-    vitt_number_next_actual = fields.Integer(string= 'Vitt number next actual',,related='number_next_actual')
+    vitt_number_next_actual = fields.Integer(string= 'Vitt number next actual',related='number_next_actual')
     is_fiscal_sequence = fields.Boolean("Fiscal sequence")
     user_ids = fields.Many2many("res.users", string="Users")
 
