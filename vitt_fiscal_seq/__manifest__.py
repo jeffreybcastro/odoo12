@@ -16,7 +16,7 @@
     'maintainer': '',
     'contributors': '',
     'category': 'Extra Tools',
-    'depends': ['base', 'account', 'vitt_jrseq','point_of_sale'],
+    'depends': ['base', 'account', 'vitt_jrseq'],
     'data': [
         "security/groups.xml",
         "security/ir.model.access.csv",
