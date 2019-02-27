@@ -31,7 +31,7 @@
         
     ],
     'demo': [],
-    'installable': True,
+    'installable': False,
     'application': False,
     'auto_install': False,
     'active' : False,
