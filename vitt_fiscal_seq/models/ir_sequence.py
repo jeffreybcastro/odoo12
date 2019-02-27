@@ -19,13 +19,7 @@ class Sequence(models.Model):
     vitt_number_next_actual = fields.Integer(string= 'Number Next Actual Config.',related='number_next_actual')
     is_fiscal_sequence = fields.Boolean(string = "Fiscal sequence")
     user_ids = fields.Many2many("res.users", string="Users")
-
-    # @api.multi
-    # def get_prefix(self):
-    #     # res = super(Sequence, self).create(vals)
-    #     for rec in self:
-    #         rec.prefix = rec.vitt_prefix
-    #     # return res  
+    
     @api.depends('min_value')
     def display_minimal_value(self):
         if self.vitt_prefix:
