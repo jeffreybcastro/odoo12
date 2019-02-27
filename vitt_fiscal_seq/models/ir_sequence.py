@@ -9,23 +9,17 @@ class Sequence(models.Model):
     _inherit = "ir.sequence"
 
     fiscal_sequence_regime_ids = fields.One2many("vitt_fiscal_seq.fiscal_sequence_regime", "sequence_id")
-    expiration_date = fields.Date(string='Expiration Date')
-    vitt_min_value = fields.Char(string='Minimal number', readonly=True,compute='display_minimal_value')
-    vitt_max_value = fields.Char(string='Max number', readonly=True,compute='display_max_value')
-    percentage_alert = fields.Float(string='percentage alert', default=80, compute='compute_percentage')
-    percentage = fields.Float(string='percentage', compute='compute_percentage')
-    vitt_prefix = fields.Char(string='Prefix Sequence',related='prefix')
-    vitt_padding = fields.Integer(string='Padding Sequence',related='padding',default=8)
-    vitt_number_next_actual = fields.Integer(string= 'Number Next Actual Config.',related='number_next_actual')
-    is_fiscal_sequence = fields.Boolean(string = "Fiscal sequence")
+    expiration_date = fields.Date('Expiration Date')
+    vitt_min_value = fields.Char('Minimal number', readonly=True)
+    vitt_max_value = fields.Char('Max number', readonly=True)
+    percentage_alert = fields.Float('percentage alert', default=80)
+    percentage = fields.Float('percentage', compute='compute_percentage')
+    vitt_prefix = fields.Char('Prefix', related='prefix')
+    vitt_padding = fields.Integer('Number padding', related='padding')
+    vitt_number_next_actual = fields.Integer('Next Number', related='number_next_actual')
+    is_fiscal_sequence = fields.Boolean("Fiscal sequence")
     user_ids = fields.Many2many("res.users", string="Users")
 
-    # @api.multi
-    # def get_prefix(self):
-    #     # res = super(Sequence, self).create(vals)
-    #     for rec in self:
-    #         rec.prefix = rec.vitt_prefix
-    #     # return res  
     @api.depends('min_value')
     def display_minimal_value(self):
         if self.vitt_prefix:
