@@ -10,7 +10,7 @@ from odoo.exceptions import Warning
 
 class Authorization(models.Model):
     _name = "vitt_fiscal_seq.authorization_code"
-    _description = "Authorization code"
+    _description = "Authorization Code"
 
     name = fields.Char('Authorization code', help='Authorization code', required=True, size= 37)
     expiration_date = fields.Date('Expiration Date', required=True)
@@ -36,7 +36,7 @@ class Authorization(models.Model):
         '000-001-06-' : '06 Notas de Crédito ',
         '000-001-05-' : '05 Retención',
         '000-001-07-' : '07 Notas de Débito',
-        '000-001-08-' : '08 Guía de de Remisión'
+        '000-001-08-' : '08 Guía de de Remisión',
         }
         lst = []
         for x in dicc.items():
@@ -56,7 +56,7 @@ class Authorization(models.Model):
         
         code_type_name = vals.get("code_type")
         if len(_obj) > 1:
-            raise Warning(_('No puedes tener 2 regimenes activos iguales %s') % code_type_name )
+            raise Warning(_('No puedes tener 2 regimenes activos iguales') )
         
         len_cai = ''
         len_cai = vals.get("name")
@@ -94,7 +94,13 @@ class Authorization(models.Model):
         if len(len_cai) <=  36 :
             raise Warning(_('Formato del CAI es invalido!'))
         elif len_cai.isupper() == False:
-            raise Warning(_('Formato del CAI debe ser en mayuscula!')) 
+            raise Warning(_('Formato del CAI debe ser en mayuscula!'))
+
+        # for obj in self.fiscal_sequence_regime_ids:
+        #     for ir_sequence in obj.sequence_id:
+        #         if self.active == False:
+        #             sequence_vals = {'active': False}
+        #             ir_sequence.write(sequence_vals)
         res = self._update_ir_sequence()
         return res
 
@@ -125,7 +131,7 @@ class Authorization(models.Model):
 
 class Fiscal_sequence(models.Model):
     _name = "vitt_fiscal_seq.fiscal_sequence_regime"
-    _description = "Fiscal sequence code"
+    _description = "Fiscal Sequence Regime" 
     authorization_code_id = fields.Many2one('vitt_fiscal_seq.authorization_code', required=True)
     sequence_id = fields.Many2one('ir.sequence', "Fiscal Number")
     actived = fields.Boolean('Active')
